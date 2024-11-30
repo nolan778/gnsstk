@@ -136,6 +136,7 @@ namespace GNSS
     }
 
     // The previous ephemeris is set based on what was the current prior this update.
+    m_array[index].prn = prn;
     m_array[index].previousEph = m_array[index].currentEph;
     m_array[index].currentEph  = eph;
 
@@ -161,6 +162,7 @@ namespace GNSS
       return false;
     }
     
+    m_array[index].prn = prn;
     m_array[index].almanac = alm;
 
     return true;

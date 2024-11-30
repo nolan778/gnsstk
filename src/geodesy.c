@@ -779,7 +779,10 @@ BOOL GEODESY_ComputeAzimuthAndElevationAnglesBetweenToPointsInTheEarthFixedFrame
   const double toY,   //!< earth centered earth fixed vector to point Y component   [m]
   const double toZ,   //!< earth centered earth fixed vector to point Z component   [m]
   double* elevation,  //!< elevation angle [rad]
-  double* azimuth     //!< azimuth angle   [rad]
+  double* azimuth,    //!< azimuth angle   [rad]
+  double* dNorth,     //!< north distance [m]
+  double* dEast,      //!< east distance  [m]
+  double* dDown       //!< down distance  [m]
   )
 {
   double lat; // reference geodetic latitude  ('from' point) [rad]
@@ -843,6 +846,10 @@ BOOL GEODESY_ComputeAzimuthAndElevationAnglesBetweenToPointsInTheEarthFixedFrame
   if( *azimuth < 0.0 )
     *azimuth += TWOPI;
   
+  *dNorth = dN;
+  *dEast = dE;
+  *dDown = -dUp;
+
   return TRUE;
 }
 

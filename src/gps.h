@@ -288,6 +288,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
   const double         userX,        //!< user X position WGS84 ECEF                                   [m]
   const double         userY,        //!< user Y position WGS84 ECEF                                   [m]
   const double         userZ,        //!< user Z position WGS84 ECEF                                   [m]
+  const double         userVx,       //!< user X velocity WGS84 ECEF                                   [m/s]
+  const double         userVy,       //!< user Y velocity WGS84 ECEF                                   [m/s]
+  const double         userVz,       //!< user Z velocity WGS84 ECEF                                   [m/s]
   const unsigned short gpsweek,      //!< user gps week (0-1024+)                                      [week]
   const double         gpstow,       //!< user time of week                                            [s]
   const double         toa,          //!< time of applicability                                        [s]  
@@ -312,7 +315,11 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
   double* satVz,             //!< satellite Z velocity WGS84 ECEF                              [m/s]
   double* azimuth,           //!< satelilte azimuth                                            [rad]
   double* elevation,         //!< satelilte elevation                                          [rad]
-  double* doppler            //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
+  double* distance,          //!< satellite distance to the user position                      [m],
+  double* doppler,           //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
+  double* dNorth,
+  double* dEast,
+  double* dDown
   );
 
 
@@ -337,6 +344,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
   const double         userX,        //!< user X position WGS84 ECEF  [m]
   const double         userY,        //!< user Y position WGS84 ECEF  [m]
   const double         userZ,        //!< user Z position WGS84 ECEF  [m]
+  const double         userVx,       //!< user X velocity WGS84 ECEF  [m/s]
+  const double         userVy,       //!< user Y velocity WGS84 ECEF  [m/s]
+  const double         userVz,       //!< user Z velocity WGS84 ECEF  [m/s]
   const unsigned short gpsweek,      //!< gps week of signal transmission (0-1024+)                              [week]
   const double         gpstow,       //!< time of week of signal transmission  (gpstow-psr/c)                    [s]
   const unsigned short ephem_week,   //!< ephemeris: GPS week (0-1024+)                                          [weeks]
@@ -371,6 +381,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
   double* satVz,             //!< satellite Z velocity WGS84 ECEF                              [m/s]
   double* azimuth,           //!< satelilte azimuth                                            [rad]
   double* elevation,         //!< satelilte elevation                                          [rad]
+  double* distance,          //!< satellite distance to the user position                      [m],
   double* doppler            //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
   );
 

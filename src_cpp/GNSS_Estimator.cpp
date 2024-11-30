@@ -1430,6 +1430,7 @@ namespace GNSS
               rxBaseData->m_pvt.x,
               rxBaseData->m_pvt.y,
               rxBaseData->m_pvt.z,
+              0, 0, 0,
               rxBaseData->m_ObsArray[i].week,
               rxBaseData->m_ObsArray[i].tow,              
               eph.week,
@@ -1464,6 +1465,7 @@ namespace GNSS
               &rxBaseData->m_ObsArray[i].satellite.vz,
               &rxBaseData->m_ObsArray[i].satellite.azimuth,
               &rxBaseData->m_ObsArray[i].satellite.elevation,
+              &rxBaseData->m_ObsArray[i].satellite.distance,
               &rxBaseData->m_ObsArray[i].satellite.doppler
               );
 
@@ -1596,6 +1598,7 @@ namespace GNSS
             x,
             y,
             z,
+            0, 0, 0,
             rxData->m_ObsArray[i].week,
             rxData->m_ObsArray[i].tow,              
             eph.week,
@@ -1630,6 +1633,7 @@ namespace GNSS
             &rxData->m_ObsArray[i].satellite.vz,
             &rxData->m_ObsArray[i].satellite.azimuth,
             &rxData->m_ObsArray[i].satellite.elevation,
+            &rxData->m_ObsArray[i].satellite.distance,
             &rxData->m_ObsArray[i].satellite.doppler
             );
 

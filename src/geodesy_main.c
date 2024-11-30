@@ -274,6 +274,7 @@ int main( int argc, char* argv[] )
     {
       double elevation=0;  //!< elevation angle [rad]
       double azimuth=0;    //!< azimuth angle   [rad]
+      double tmp;
       double fromX = atof( argv[3] );
       double fromY = atof( argv[4] );
       double fromZ = atof( argv[5] );
@@ -290,7 +291,8 @@ int main( int argc, char* argv[] )
         toY,   //!< earth centered earth fixed vector to point Y component   [m]
         toZ,   //!< earth centered earth fixed vector to point Z component   [m]
         &elevation,  //!< elevation angle [rad]
-        &azimuth     //!< azimuth angle   [rad]
+        &azimuth,    //!< azimuth angle   [rad]
+        &tmp, &tmp, &tmp
       );
       if( result == FALSE )
       {

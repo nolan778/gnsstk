@@ -334,7 +334,7 @@ void GPS_ComputeUserToSatelliteRange(
   const double userY,    //!< user Y position WGS84 ECEF         [m]
   const double userZ,    //!< user Z position WGS84 ECEF         [m]
   const double satX,     //!< satellite X position WGS84 ECEF    [m]
-  const double satY,     //!< satellite Y positoin WGS84 ECEF    [m]
+  const double satY,     //!< satellite Y position WGS84 ECEF    [m]
   const double satZ,     //!< satellite Z position WGS84 ECEF    [m] 
   double* range          //!< user to satellite range            [m]
   )
@@ -360,7 +360,7 @@ void GPS_ComputeUserToSatelliteRangeAndRangeRate(
   const double userVy,   //!< user Y velocity WGS84 ECEF         [m/s]
   const double userVz,   //!< user Z velocity WGS84 ECEF         [m/s]
   const double satX,     //!< satellite X position WGS84 ECEF    [m]
-  const double satY,     //!< satellite Y positoin WGS84 ECEF    [m]
+  const double satY,     //!< satellite Y position WGS84 ECEF    [m]
   const double satZ,     //!< satellite Z position WGS84 ECEF    [m] 
   const double satVx,    //!< satellite X velocity WGS84 ECEF    [m/s]
   const double satVy,    //!< satellite Y velocity WGS84 ECEF    [m/s]
@@ -392,6 +392,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
   const double         userX,        //!< user X position WGS84 ECEF                                   [m]
   const double         userY,        //!< user Y position WGS84 ECEF                                   [m]
   const double         userZ,        //!< user Z position WGS84 ECEF                                   [m]
+  const double         userVx,       //!< user X velocity WGS84 ECEF                                   [m/s]
+  const double         userVy,       //!< user Y velocity WGS84 ECEF                                   [m/s]
+  const double         userVz,       //!< user Z velocity WGS84 ECEF                                   [m/s]
   const unsigned short gpsweek,      //!< user gps week (0-1024+)                                      [week]
   const double         gpstow,       //!< user time of week                                            [s]
   const double         toa,          //!< time of applicability                                        [s]  
@@ -416,7 +419,11 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
   double* satVz,             //!< satellite Z velocity WGS84 ECEF                              [m/s]
   double* azimuth,           //!< satelilte azimuth                                            [rad]
   double* elevation,         //!< satelilte elevation                                          [rad]
-  double* doppler            //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
+  double* distance,          //!< satellite distance to the user position                      [m],
+  double* doppler,           //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
+  double* dNorth,
+  double* dEast,
+  double* dDown
   )
 {
   double tow;        // user time of week adjusted with the clock corrections [s]
@@ -510,9 +517,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
       userX,
       userY,
       userZ,
-      0.0,
-      0.0,
-      0.0,
+      userVx,
+      userVy,
+      userVz,
       x,
       y,
       z,
@@ -532,7 +539,10 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
     y,
     z,
     elevation, // sets the elevation 
-    azimuth ); // sets the azimuth
+    azimuth,   // sets the azimuth
+    dNorth,
+    dEast,
+    dDown);
 
   *satX = x;
   *satY = y;
@@ -541,6 +551,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
   *satVy = vy;
   *satVz = vz;
   
+  *distance = range;
   *doppler = range_rate;
 
 }
@@ -551,6 +562,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
   const double         userX,        //!< user X position WGS84 ECEF  [m]
   const double         userY,        //!< user Y position WGS84 ECEF  [m]
   const double         userZ,        //!< user Z position WGS84 ECEF  [m]
+  const double         userVx,       //!< user X velocity WGS84 ECEF  [m/s]
+  const double         userVy,       //!< user Y velocity WGS84 ECEF  [m/s]
+  const double         userVz,       //!< user Z velocity WGS84 ECEF  [m/s]
   const unsigned short gpsweek,      //!< gps week of signal transmission (0-1024+)                              [week]
   const double         gpstow,       //!< time of week of signal transmission  (gpstow-psr/c)                    [s]
   const unsigned short ephem_week,   //!< ephemeris: GPS week (0-1024+)                                          [weeks]
@@ -585,6 +599,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
   double* satVz,             //!< satellite Z velocity WGS84 ECEF                              [m/s]
   double* azimuth,           //!< satelilte azimuth                                            [rad]
   double* elevation,         //!< satelilte elevation                                          [rad]
+  double* distance,          //!< satellite distance to the user position                      [m],
   double* doppler            //!< satellite doppler with respect to the user position          [m/s], Note: User must convert to Hz
   )
 {
@@ -677,9 +692,9 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
       userX,
       userY,
       userZ,
-      0.0,
-      0.0,
-      0.0,
+      userVx,
+      userVy,
+      userVz,
       x,
       y,
       z,
@@ -690,6 +705,8 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
       &range_rate );    
   }
 
+  double tmp;
+
   GEODESY_ComputeAzimuthAndElevationAnglesBetweenToPointsInTheEarthFixedFrame(
     GEODESY_REFERENCE_ELLIPSE_WGS84,
     userX,
@@ -699,7 +716,8 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
     y,
     z,
     elevation, // sets the elevation 
-    azimuth ); // sets the azimuth
+    azimuth,   // sets the azimuth
+    &tmp, &tmp, &tmp);
 
   *satX = x;
   *satY = y;
@@ -708,6 +726,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
   *satVy = vy;
   *satVz = vz;
   
+  *distance = range;
   *doppler = range_rate;
 }
 

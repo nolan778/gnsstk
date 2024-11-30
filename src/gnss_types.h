@@ -199,6 +199,7 @@ typedef struct
   double clkdrift;   //!< The satellite clock drift correction [m/s].
   double elevation;  //!< The elevation angle between the user and the satellite [rad].
   double azimuth;    //!< The azimuth angle between the user and the satellite, measured clockwise positive from the true North [rad].   
+  double distance;   //!< The satellite distance to the user position [m]
   double doppler;   //!< The satellite doppler with respect to the user position [m/s], Note: User must convert to Hz.
 } GNSS_structSatellitePVT;
 
