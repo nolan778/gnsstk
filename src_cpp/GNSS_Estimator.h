@@ -44,7 +44,6 @@ SUCH DAMAGE.
 #include "Matrix.h"
 
 using namespace Zenautics; // for Matrix
-using namespace std;
 
 namespace GNSS
 {
@@ -439,7 +438,7 @@ namespace GNSS
 
     \return   true if successful, false if error.    
     */
-    bool GNSS_Estimator::DeterminePseudorangeMisclosure_GPSL1( 
+    bool DeterminePseudorangeMisclosure_GPSL1(
       GNSS_RxData *rxData,       //!< The pointer to the receiver data.    
       const unsigned int index,  //!< The index of the observation in the receiver data.
       GNSS_RxData *rxBaseData,   //!< The pointer to the reference receiver data. NULL if not available.    

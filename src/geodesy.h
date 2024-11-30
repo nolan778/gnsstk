@@ -107,7 +107,7 @@ typedef enum
 \brief  string array with text description corresponding to GEODESY_enumReferenceEllipse
 \see    GEODESY_enumReferenceEllipse
 */
-static char *GEODESY_REFERENCE_ELLIPSE_STRING_DESCRIPTION[64] =
+static const char *GEODESY_REFERENCE_ELLIPSE_STRING_DESCRIPTION[64] =
 {
   "World Geodetic System 1984",
   "Airy 1830",

@@ -49,7 +49,7 @@ SUCH DAMAGE.
 #include "navigation.h"
 #include "troposphere.h"
 #include "time_conversion.h"
-#include "GNSS_Lambda.h"
+//#include "GNSS_Lambda.h" // Commented out: File doesn't exist
 
 //#define DEBUG_THE_ESTIMATOR
 #define GNSS_CYCLESLIP_THREADHOLD 3
@@ -1573,8 +1573,8 @@ namespace GNSS
           rxData->m_ObsArray[i].flags.isEphemerisValid = true;
 
           // Account for week rollover if needed.
-          if( eph.week < 1024 )
-            eph.week += 1024;
+          if( eph.week > 1024 )
+            eph.week -= 1024;
 
           // Check the age of the clock information for the ephemeris.
           dtmp1 = rxData->m_ObsArray[i].week*SECONDS_IN_WEEK + rxData->m_ObsArray[i].tow;
@@ -5916,7 +5916,8 @@ namespace GNSS
 
       Matrix a_tmp = a;
 
-      result = LAMBDA::lambda1( a, Q, 2, afixed, sqnorm, Qahat, Z ); 
+      // Commented out: Lambda doesn't exist
+      //result = LAMBDA::lambda1( a, Q, 2, afixed, sqnorm, Qahat, Z ); 
 
       //a.Print( "a_postLambda.txt", 9 );
       //Q.Print( "Q_postLambda.txt", 9 );

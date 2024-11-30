@@ -3598,7 +3598,7 @@ namespace Zenautics
     if( !MTX_FFT2( &m_Matrix, &A.m_Matrix ) )
     {
       MTX_ERROR_MSG( "MTX_FFT2 returned false." );
-      return false;
+      return Matrix();
     }
     return A;
   }
@@ -3620,7 +3620,7 @@ namespace Zenautics
     if( !MTX_IFFT2( &m_Matrix, &A.m_Matrix ) )
     {
       MTX_ERROR_MSG( "MTX_IFFT2 returned false." );
-      return false;
+      return Matrix();
     }
     return A;
   }
