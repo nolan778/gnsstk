@@ -41,6 +41,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -160,7 +161,7 @@ typedef struct
 /// [4] Wong, R.V.C & K.P. Schwarz (1985). Dynamic Positioning with an Integrated GPS-INS. Formulae and 
 ///     Baseline Tests. University of Calgary. UCSE Report #30003. pp. 22 \n
 /// 
-void GPS_ComputeSatelliteClockCorrectionAndDrift(
+void GNSSTK_API GPS_ComputeSatelliteClockCorrectionAndDrift(
   const unsigned short transmission_gpsweek,   //!< GPS week when signal was transmit (0-1024+)            [weeks]
   const double         transmission_gpstow,    //!< GPS time of week when signal was transmit              [s]  
   const unsigned short ephem_week,             //!< ephemeris: GPS week (0-1024+)                          [weeks]
@@ -195,7 +196,7 @@ void GPS_ComputeSatelliteClockCorrectionAndDrift(
 /// [4] Wong, R.V.C & K.P. Schwarz (1985). Dynamic Positioning with an Integrated GPS-INS. Formulae and 
 ///     Baseline Tests. University of Calgary. UCSE Report #30003. pp. 22 \n
 /// 
-void GPS_ComputeSatellitePositionAndVelocity( 
+void GNSSTK_API GPS_ComputeSatellitePositionAndVelocity(
   const unsigned short transmission_gpsweek,   //!< GPS week when signal was transmit (0-1024+)                                              [weeks]
   const double         transmission_gpstow,    //!< GPS time of week when signal was transmit                                                [s]  
   const unsigned short ephem_week,             //!< ephemeris: GPS week (0-1024+)                                                            [weeks]
@@ -233,7 +234,7 @@ void GPS_ComputeSatellitePositionAndVelocity(
 /// \date     2006-11-23
 /// \since    2006-11-23
 /// 
-void GPS_ComputeUserToSatelliteRange( 
+void GNSSTK_API GPS_ComputeUserToSatelliteRange(
   const double userX,    //!< user X position WGS84 ECEF         [m]
   const double userY,    //!< user Y position WGS84 ECEF         [m]
   const double userZ,    //!< user Z position WGS84 ECEF         [m]
@@ -251,7 +252,7 @@ void GPS_ComputeUserToSatelliteRange(
 /// \date     2005-08-15
 /// \since    2005-08-15
 /// 
-void GPS_ComputeUserToSatelliteRangeAndRangeRate( 
+void GNSSTK_API GPS_ComputeUserToSatelliteRangeAndRangeRate(
   const double userX,    //!< user X position WGS84 ECEF         [m]
   const double userY,    //!< user Y position WGS84 ECEF         [m]
   const double userZ,    //!< user Z position WGS84 ECEF         [m]
@@ -284,7 +285,7 @@ void GPS_ComputeUserToSatelliteRangeAndRangeRate(
 /// \b REFERENCES \n
 /// [1] ICD-GPS-200C
 /// 
-void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacData(
+void GNSSTK_API GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacData(
   const double         userX,        //!< user X position WGS84 ECEF                                   [m]
   const double         userY,        //!< user Y position WGS84 ECEF                                   [m]
   const double         userZ,        //!< user Z position WGS84 ECEF                                   [m]
@@ -340,7 +341,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnAlmanacD
 /// \b REFERENCES \n
 /// [1] ICD-GPS-200C
 /// 
-void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmerisData(
+void GNSSTK_API GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmerisData(
   const double         userX,        //!< user X position WGS84 ECEF  [m]
   const double         userY,        //!< user Y position WGS84 ECEF  [m]
   const double         userZ,        //!< user Z position WGS84 ECEF  [m]
@@ -406,7 +407,7 @@ void GPS_ComputeSatellitePositionVelocityAzimuthElevationDoppler_BasedOnEphmeris
 /// \b REFERENCES \n
 /// [1] ICD-GPS-200C
 /// 
-BOOL GPS_DecodeRawGPSEphemeris( 
+BOOL GNSSTK_API GPS_DecodeRawGPSEphemeris(
   const unsigned char subframe1[30],  //!< subframe 1 data, 30 bytes * 8bits/byte = 240 bits, thus parity bits have been removed
   const unsigned char subframe2[30],  //!< subframe 2 data, 30 bytes * 8bits/byte = 240 bits, thus parity bits have been removed
   const unsigned char subframe3[30],  //!< subframe 3 data, 30 bytes * 8bits/byte = 240 bits, thus parity bits have been removed

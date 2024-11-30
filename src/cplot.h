@@ -43,6 +43,8 @@ extern "C"
 {
 #endif
 
+#include "gnsstk.h"
+
 typedef int BOOL;
 
 #ifndef FALSE
@@ -315,16 +317,16 @@ typedef struct
 
 /// \brief  Initialize the general plotting options.
 /// \return TRUE(1) if successful, FALSE(0) otherwise.
-BOOL CPLOT_PlotOptionsInit( CPLOT_structPlotOptions *Opt );
+BOOL GNSSTK_API CPLOT_PlotOptionsInit( CPLOT_structPlotOptions *Opt );
 
 
 /// \brief  Initialize the main CPLOT data container.
 /// \return TRUE(1) if successful, FALSE(0) otherwise.
-BOOL CPLOT_Init( CPLOT* P );
+BOOL GNSSTK_API CPLOT_Init( CPLOT* P );
 
 /// \brief  Set all the general plotting options.
 /// \return TRUE(1) if successful, FALSE(0) otherwise.
-BOOL CPLOT_SetPlotOptions( 
+BOOL GNSSTK_API CPLOT_SetPlotOptions(
   CPLOT *P, 
   CPLOT_structPlotOptions *opt
   );
@@ -332,7 +334,7 @@ BOOL CPLOT_SetPlotOptions(
 /// \brief  Plot a data series. Call this function repeatedly 
 ///         for each data series.
 /// \return TRUE(1) if successful, FALSE(0) otherwise.
-BOOL CPLOT_Plot( 
+BOOL GNSSTK_API CPLOT_Plot(
   CPLOT *P, 
   CPLOT_structSeries *Series 
   );
@@ -340,15 +342,15 @@ BOOL CPLOT_Plot(
 /// \brief  Once plotting is complete, save the bitmap to the
 ///         file specified.
 /// \return TRUE(1) if successful, FALSE(0) otherwise.
-BOOL CPLOT_SaveToFile( 
+BOOL GNSSTK_API CPLOT_SaveToFile(
   CPLOT *P,
   const char *FileName 
   );
 
 
-BOOL CPLOT_IsNAN( double value );
-BOOL CPLOT_IsPostiveINF( double value );
-BOOL CPLOT_IsNegativeINF( double value );
+BOOL GNSSTK_API CPLOT_IsNAN( double value );
+BOOL GNSSTK_API CPLOT_IsPostiveINF( double value );
+BOOL GNSSTK_API CPLOT_IsNegativeINF( double value );
 
 #ifdef __cplusplus
 }

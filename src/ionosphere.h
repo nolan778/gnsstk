@@ -49,6 +49,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 /**
@@ -68,7 +69,7 @@ satellite.
 \b REFERENCES \n
 - GPS ICD 200C, pp. 126-128
 */
-BOOL IONOSPHERE_GetL1KlobucharCorrection(   
+BOOL GNSSTK_API IONOSPHERE_GetL1KlobucharCorrection(
   const double  alpha0,     //!< coefficients of a cubic equation representing the amplitude of the vertical delay [s]
   const double  alpha1,     //!< coefficients of a cubic equation representing the amplitude of the vertical delay [s/semi-circle]
   const double  alpha2,     //!< coefficients of a cubic equation representing the amplitude of the vertical delay [s/semi-circle^2]

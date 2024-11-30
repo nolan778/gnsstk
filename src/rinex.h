@@ -44,11 +44,12 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 #include "gnss_types.h"
 #include "gps.h"
 
-
+    
 /**
 \brief  NOT USED - A container for RINEX observation file header data. 
 Each parameter is the string (multiline is some cases) of columns 
@@ -252,7 +253,7 @@ remarks
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_GetHeader( 
+BOOL GNSSTK_API RINEX_GetHeader(
   const char* filepath,           //!< Path to the RINEX file.
   char* buffer,                   //!< (input/output) A character buffer in which to place the RINEX header.
   const unsigned buffer_max_size, //!< (input)  The maximum size of the buffer [bytes]. This value should be large enough to hold the entire header, (8192 to 16384).
@@ -273,7 +274,7 @@ BOOL RINEX_GetHeader(
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_DecodeHeader_ObservationFile(
+BOOL GNSSTK_API RINEX_DecodeHeader_ObservationFile(
   const char* header_buffer,         //!< (input) The character buffer containing the RINEX header.
   const unsigned header_buffer_size, //!< (input) The size of the character buffer containing the RINEX header [bytes]. Not the maximum size, the size of the valid data in the buffer.
   RINEX_structDecodedHeader* header  //!< (output) The decoded header data.
@@ -291,7 +292,7 @@ BOOL RINEX_DecodeHeader_ObservationFile(
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_GetNextObservationSet(
+BOOL GNSSTK_API RINEX_GetNextObservationSet(
   FILE* fid,                               //!< (input) An open (not NULL) file pointer to the RINEX data.
   RINEX_structDecodedHeader* RINEX_header, //!< (input/output) The decoded RINEX header information. The wavelength markers can change as data is decoded.
   BOOL *wasEndOfFileReached,               //!< Has the end of the file been reached (output).
@@ -316,7 +317,7 @@ BOOL RINEX_GetNextObservationSet(
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_DecodeGPSNavigationFile(
+BOOL GNSSTK_API RINEX_DecodeGPSNavigationFile(
   const char *filepath,                          //!< (input) The file path to the GPS Navigation message file.
   GNSS_structKlobuchar *iono_model,              //!< (input/output) A pointer to the ionospheric parameters struct.
   GPS_structEphemeris *ephemeris_array,          //!< (input/output) A pointer to the GPS ephemeris array.
@@ -352,7 +353,7 @@ result = RINEX_DecodeFileName( filepath, station_name, &dayofyear, &file_sequenc
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_DecodeFileName(
+BOOL GNSSTK_API RINEX_DecodeFileName(
   const char *filepath,            //!< (input) A full filepath.
   char *station_name,              //!< (output) A 5 character C string. char station_name[5]. In which to place the 4-character station name designator. This must be at least 5 characters.
   unsigned short *dayofyear,       //!< (output) The day of year.
@@ -381,7 +382,7 @@ result = RINEX_GetKlobucharIonoParametersFromNavFile( filepath, &iono );
 
 \return  TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL RINEX_GetKlobucharIonoParametersFromNavFile(
+BOOL GNSSTK_API RINEX_GetKlobucharIonoParametersFromNavFile(
   const char *filepath,             //!< (input) The file path to the GPS Navigation message file.
   GNSS_structKlobuchar *iono_model  //!< (input/output) A pointer to the ionospheric parameters struct.
   );

@@ -45,6 +45,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -516,7 +517,7 @@ with an associated maximum length (8192 bytes recommended ).
 \since    2008-12-01
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_FindNextMessageInFile(
+BOOL GNSSTK_API NOVATELOEM3_FindNextMessageInFile(
   FILE *fid,                       //!< A file pointer to an open file (input).
   unsigned char *message,          //!< A message buffer in which to place the message found (input/output).
   const unsigned maxMessageLength, //!< The maximum size of the message buffer (input).
@@ -541,7 +542,7 @@ with an associated maximum length (8192 bytes recommended ).
 \since    2008-12-03
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_FindNextMessageInBuffer(
+BOOL GNSSTK_API NOVATELOEM3_FindNextMessageInBuffer(
   unsigned char *buffer,           //!< A pointer to a buffer containing input data.
   const unsigned bufferLength,     //!< The length of the valid data contained in the buffer.
   unsigned char *message,          //!< A message buffer in which to place the message found (input/output).
@@ -568,7 +569,7 @@ information.
 \since    2008-12-01
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_DecodeREPB(
+BOOL GNSSTK_API NOVATELOEM3_DecodeREPB(
   const unsigned char *message,           //!< The message buffer containing a complete RANGEB message (input).
   const unsigned messageLength,           //!< The length of the entire message (input).
   unsigned       *prn,                    //!< The satellite PRN number.
@@ -620,7 +621,7 @@ decode the binary message into the user provided array.
 \since    2008-12-01
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_DecodeRGEB(
+BOOL GNSSTK_API NOVATELOEM3_DecodeRGEB(
   const unsigned char *message,            //!< The message buffer containing a complete RGEB message (input).
   const unsigned messageLength,            //!< The length of the entire message (input).
   NOVATELOEM3_structObservationHeader* obsHeader, //!< A pointer to a user provided struct with obs header info (output).
@@ -640,7 +641,7 @@ Given a message buffer with a complete NovAtel OEM3 POSB binary message.
 \since    2008-12-08
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_DecodePOSB(
+BOOL GNSSTK_API NOVATELOEM3_DecodePOSB(
   const unsigned char *message,  //!< The message buffer containing a complete RGEB message (input).
   const unsigned messageLength,  //!< The length of the entire message (input).
   unsigned short* gps_week,      //!< The GPS week number [0-1023], user must account for week rollover (output).
@@ -671,7 +672,7 @@ log will output at a maximum rate of 1 Hz.
 \since    2008-12-08
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_DecodeTM1B(
+BOOL GNSSTK_API NOVATELOEM3_DecodeTM1B(
   const unsigned char *message,  //!< The message buffer containing a complete RGEB message (input).
   const unsigned messageLength,  //!< The length of the entire message (input).
   unsigned short* gps_week,      //!< The GPS week number [0-1023], user must account for week rollover (output).
@@ -695,7 +696,7 @@ extract the alpha and beta values.
 \since    2008-12-03
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM3_DecodeIONB(
+BOOL GNSSTK_API NOVATELOEM3_DecodeIONB(
   const unsigned char *message, //!< The message buffer containing a complete RGEB message (input).
   const unsigned messageLength, //!< The length of the entire message (input).
   double *alpha0,     //!< coefficients of a cubic equation representing the amplitude of the vertical delay [s] (output).
@@ -721,7 +722,7 @@ with an associated maximum length (8192 bytes recommended ).
 \since    2006-11-09
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_FindNextMessageInFile(
+BOOL GNSSTK_API NOVATELOEM4_FindNextMessageInFile(
   FILE *fid,                       //!< A file pointer to an open file (input).
   unsigned char *message,          //!< A message buffer in which to place the message found (input/output).
   const unsigned maxMessageLength, //!< The maximum size of the message buffer (input).
@@ -746,7 +747,7 @@ with an associated maximum length (8192 bytes recommended ).
 \since    2008-12-19
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_FindNextMessageInBuffer(
+BOOL GNSSTK_API NOVATELOEM4_FindNextMessageInBuffer(
   unsigned char *buffer,           //!< A pointer to a buffer containing input data.
   const unsigned bufferLength,     //!< The length of the valid data contained in the buffer.
   unsigned char *message,          //!< A message buffer in which to place the message found (input/output).
@@ -766,7 +767,7 @@ BOOL NOVATELOEM4_FindNextMessageInBuffer(
 \since    2006-11-10
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeBinaryMessageHeader(
+BOOL GNSSTK_API NOVATELOEM4_DecodeBinaryMessageHeader(
   const unsigned char *message,            //!< The message buffer containing a complete NOVATEL OEM4 binary message (input).
   const unsigned short messageLength,      //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader *header   //!< A pointer to a NovAtel OEM4 header information struct (output).
@@ -786,7 +787,7 @@ decode the binary message into the user provided array.
 \since    2006-11-10
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeRANGEB(
+BOOL GNSSTK_API NOVATELOEM4_DecodeRANGEB(
   const unsigned char *message,            //!< The message buffer containing a complete RANGEB message (input).
   const unsigned short messageLength,      //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader* header,  //!< A pointer to a NovAtel OEM4 header information struct (output).
@@ -808,7 +809,7 @@ decode the binary message.
 \since    2008-12-18
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeBESTPOSB(
+BOOL GNSSTK_API NOVATELOEM4_DecodeBESTPOSB(
   const unsigned char *message,            //!< The message buffer containing a complete RANGEB message (input).
   const unsigned short messageLength,      //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader* header,  //!< A pointer to a NovAtel OEM4 header information struct (output).
@@ -828,7 +829,7 @@ decode the binary message.
 \since    2008-12-18
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeTIMEB(
+BOOL GNSSTK_API NOVATELOEM4_DecodeTIMEB(
   const unsigned char *message,            //!< The message buffer containing a complete RANGEB message (input).
   const unsigned short messageLength,      //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader* header,  //!< A pointer to a NovAtel OEM4 header information struct (output).
@@ -846,7 +847,7 @@ BOOL NOVATELOEM4_DecodeTIMEB(
 \since    2006-11-10
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeTrackingStatus(
+BOOL GNSSTK_API NOVATELOEM4_DecodeTrackingStatus(
   const unsigned rawTrackingStatus,                 //!< The raw 32 bit tracking status value (input).
   NOVATELOEM4_structTrackingStatus *trackingStatus  //!< The decoded tracking status information (output).
   );
@@ -864,7 +865,7 @@ information.
 \since    2006-11-10
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeRAWEPHEMB(
+BOOL GNSSTK_API NOVATELOEM4_DecodeRAWEPHEMB(
   const unsigned char *message,           //!< The message buffer containing a complete RANGEB message (input).
   const unsigned short messageLength,     //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader* header, //!< A pointer to a NovAtel OEM4 header information struct (output).
@@ -919,7 +920,7 @@ decode the compressed binary message into the user provided array.
 \remarks  Reviewed by GDM, March 17, 2007.
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL NOVATELOEM4_DecodeRANGECMPB(
+BOOL GNSSTK_API NOVATELOEM4_DecodeRANGECMPB(
   const unsigned char *message,            //!< The message buffer containing a complete RANGEB message (input).
   const unsigned short messageLength,      //!< The length of the entire message (input).
   NOVATELOEM4_structBinaryHeader* header,  //!< A pointer to a NovAtel OEM4 header information struct (output).

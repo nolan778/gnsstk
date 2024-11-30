@@ -7,6 +7,8 @@
 #include <memory.h>
 #include <malloc.h>
 
+#include "gnsstk.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -77,7 +79,7 @@ typedef struct kiss_fft_state* kiss_fft_cfg;
  *      buffer size in *lenmem.
  * */
 
-kiss_fft_cfg kiss_fft_alloc(int nfft,int inverse_fft,void * mem,size_t * lenmem); 
+kiss_fft_cfg GNSSTK_API kiss_fft_alloc(int nfft,int inverse_fft,void * mem,size_t * lenmem);
 
 /*
  * kiss_fft(cfg,in_out_buf)
@@ -89,12 +91,12 @@ kiss_fft_cfg kiss_fft_alloc(int nfft,int inverse_fft,void * mem,size_t * lenmem)
  * Note that each element is complex and can be accessed like
     f[k].r and f[k].i
  * */
-void kiss_fft(kiss_fft_cfg cfg,const kiss_fft_cpx *fin,kiss_fft_cpx *fout);
+void GNSSTK_API kiss_fft(kiss_fft_cfg cfg,const kiss_fft_cpx *fin,kiss_fft_cpx *fout);
 
 /*
  A more generic version of the above function. It reads its input from every Nth sample.
  * */
-void kiss_fft_stride(kiss_fft_cfg cfg,const kiss_fft_cpx *fin,kiss_fft_cpx *fout,int fin_stride);
+void GNSSTK_API kiss_fft_stride(kiss_fft_cfg cfg,const kiss_fft_cpx *fin,kiss_fft_cpx *fout,int fin_stride);
 
 /* If kiss_fft_alloc allocated a buffer, it is one contiguous 
    buffer and can be simply free()d when no longer needed*/
@@ -104,13 +106,13 @@ void kiss_fft_stride(kiss_fft_cfg cfg,const kiss_fft_cpx *fin,kiss_fft_cpx *fout
  Cleans up some memory that gets managed internally. Not necessary to call, but it might clean up 
  your compiler output to call this before you exit.
 */
-void kiss_fft_cleanup(void);
+void GNSSTK_API kiss_fft_cleanup(void);
 	
 
 /*
  * Returns the smallest integer k, such that k>=n and k has only "fast" factors (2,3,5)
  */
-int kiss_fft_next_fast_size(int n);
+int GNSSTK_API kiss_fft_next_fast_size(int n);
 
 #ifdef __cplusplus
 } 

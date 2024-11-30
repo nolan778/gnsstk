@@ -50,6 +50,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -73,7 +74,7 @@ extern "C" {
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 \remarks  (1) Millisecond time is obtained
 */
-BOOL TIMECONV_GetSystemTime(
+BOOL GNSSTK_API TIMECONV_GetSystemTime(
   unsigned short*     utc_year,     //!< Universal Time Coordinated    [year]
   unsigned char*      utc_month,    //!< Universal Time Coordinated    [1-12 months] 
   unsigned char*      utc_day,      //!< Universal Time Coordinated    [1-31 days]
@@ -96,7 +97,7 @@ BOOL TIMECONV_GetSystemTime(
 \since    2008-12-03
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL TIMECONV_SetSystemTime(
+BOOL GNSSTK_API TIMECONV_SetSystemTime(
   const unsigned short  utc_year,     //!< Universal Time Coordinated    [year]
   const unsigned char   utc_month,    //!< Universal Time Coordinated    [1-12 months] 
   const unsigned char   utc_day,      //!< Universal Time Coordinated    [1-31 days]
@@ -118,7 +119,7 @@ BOOL TIMECONV_SetSystemTime(
 \b REFERENCES \n
 http://en.wikipedia.org/wiki/Julian_day
 */
-BOOL TIMECONV_GetDayOfWeekFromJulianDate(
+BOOL GNSSTK_API TIMECONV_GetDayOfWeekFromJulianDate(
   const double julian_date,   //!< Number of days since noon Universal Time Jan 1, 4713 BCE (Julian calendar) [days]
   unsigned char *day_of_week  //!< 0-Sunday, 1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday [].
   );
@@ -136,7 +137,7 @@ BOOL TIMECONV_GetDayOfWeekFromJulianDate(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetJulianDateFromGPSTime(
+BOOL GNSSTK_API TIMECONV_GetJulianDateFromGPSTime(
   const unsigned short    gps_week,      //!< GPS week (0-1024+)             [week]
   const double            gps_tow,       //!< GPS time of week (0-604800.0)  [s]
   const unsigned char     utc_offset,    //!< Integer seconds that GPS is ahead of UTC time, always positive [s]
@@ -160,7 +161,7 @@ BOOL TIMECONV_GetJulianDateFromGPSTime(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
 Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetJulianDateFromUTCTime(
+BOOL GNSSTK_API TIMECONV_GetJulianDateFromUTCTime(
  const unsigned short     utc_year,      //!< Universal Time Coordinated  [year]
  const unsigned char      utc_month,     //!< Universal Time Coordinated  [1-12 months] 
  const unsigned char      utc_day,       //!< Universal Time Coordinated  [1-31 days]
@@ -185,7 +186,7 @@ BOOL TIMECONV_GetJulianDateFromUTCTime(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetGPSTimeFromJulianDate(
+BOOL GNSSTK_API TIMECONV_GetGPSTimeFromJulianDate(
   const double            julian_date, //!< Number of days since noon Universal Time Jan 1, 4713 BCE (Julian calendar) [days]
   const unsigned char     utc_offset,  //!< Integer seconds that GPS is ahead of UTC time, always positive [s]
   unsigned short*         gps_week,    //!< GPS week (0-1024+)            [week]
@@ -204,7 +205,7 @@ BOOL TIMECONV_GetGPSTimeFromJulianDate(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetUTCTimeFromJulianDate(
+BOOL GNSSTK_API TIMECONV_GetUTCTimeFromJulianDate(
   const double        julian_date,  //!< Number of days since noon Universal Time Jan 1, 4713 BCE (Julian calendar) [days]
   unsigned short*     utc_year,     //!< Universal Time Coordinated    [year]
   unsigned char*      utc_month,    //!< Universal Time Coordinated    [1-12 months] 
@@ -229,7 +230,7 @@ BOOL TIMECONV_GetUTCTimeFromJulianDate(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetGPSTimeFromUTCTime(
+BOOL GNSSTK_API TIMECONV_GetGPSTimeFromUTCTime(
   unsigned short     utc_year,     //!< Universal Time Coordinated    [year]
   unsigned char      utc_month,    //!< Universal Time Coordinated    [1-12 months] 
   unsigned char      utc_day,      //!< Universal Time Coordinated    [1-31 days]
@@ -259,7 +260,7 @@ BOOL TIMECONV_GetGPSTimeFromUTCTime(
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 - RINEX version 2.11, (http://www.aiub-download.unibe.ch/rinex/rinex211.txt)
 */
-BOOL TIMECONV_GetGPSTimeFromRinexTime(
+BOOL GNSSTK_API TIMECONV_GetGPSTimeFromRinexTime(
   unsigned short     utc_year,     //!< Universal Time Coordinated    [year]
   unsigned char      utc_month,    //!< Universal Time Coordinated    [1-12 months] 
   unsigned char      utc_day,      //!< Universal Time Coordinated    [1-31 days]
@@ -286,7 +287,7 @@ BOOL TIMECONV_GetGPSTimeFromRinexTime(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetUTCTimeFromGPSTime(
+BOOL GNSSTK_API TIMECONV_GetUTCTimeFromGPSTime(
   unsigned short     gps_week,     //!< GPS week (0-1024+)            [week]
   double             gps_tow,      //!< GPS time of week (0-604800.0) [s]
   unsigned short*    utc_year,     //!< Universal Time Coordinated    [year]
@@ -332,7 +333,7 @@ UTCOffset, UTC Date, Julian Date [days] \n
 13,   Jan 01 1999 00:00:00.0,    2451179.5000 \n
 14,   Jan 01 2006 00:00:00.0,    2453736.5000 \n
 */
-BOOL TIMECONV_DetermineUTCOffset(
+BOOL GNSSTK_API TIMECONV_DetermineUTCOffset(
   double julian_date,       //!< Number of days since noon Universal Time Jan 1, 4713 BCE (Julian calendar) [days]
   unsigned char* utc_offset //!< Integer seconds that GPS is ahead of UTC time, always positive             [s], obtained from a look up table
   );
@@ -349,7 +350,7 @@ BOOL TIMECONV_DetermineUTCOffset(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_GetNumberOfDaysInMonth(
+BOOL GNSSTK_API TIMECONV_GetNumberOfDaysInMonth(
   const unsigned short year,        //!< Universal Time Coordinated    [year]
   const unsigned char month,        //!< Universal Time Coordinated    [1-12 months] 
   unsigned char* days_in_month      //!< Days in the specified month   [1-28|29|30|31 days]
@@ -367,7 +368,7 @@ BOOL TIMECONV_GetNumberOfDaysInMonth(
 - Hofmann-Wellenhof, B., H. Lichtenegger, and J. Collins (1994). GPS Theory and 
   Practice, Third, revised edition. Springer-Verlag, Wien New York. pp. 38-42 \n
 */
-BOOL TIMECONV_IsALeapYear( const unsigned short year );
+BOOL GNSSTK_API TIMECONV_IsALeapYear( const unsigned short year );
 
 
 /**
@@ -381,7 +382,7 @@ BOOL TIMECONV_IsALeapYear( const unsigned short year );
 \remarks
 (1) Performed independant comparison with http://www.mbari.org/staff/coletti/doytable.html
 */
-BOOL TIMECONV_GetDayOfYear(
+BOOL GNSSTK_API TIMECONV_GetDayOfYear(
  const unsigned short utc_year,    // Universal Time Coordinated           [year]
  const unsigned char  utc_month,   // Universal Time Coordinated           [1-12 months] 
  const unsigned char  utc_day,     // Universal Time Coordinated           [1-31 days]
@@ -397,7 +398,7 @@ BOOL TIMECONV_GetDayOfYear(
 \since    2007-12-07
 \return   TRUE(1) if successful, FALSE(0) otherwise.
 */
-BOOL TIMECONV_GetGPSTimeFromYearAndDayOfYear(
+BOOL GNSSTK_API TIMECONV_GetGPSTimeFromYearAndDayOfYear(
  const unsigned short year,      // The year [year]
  const unsigned short dayofyear, // The number of days into the year (1-366) [days]
  unsigned short*      gps_week,  //!< GPS week (0-1024+)            [week]

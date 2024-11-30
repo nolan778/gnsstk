@@ -41,6 +41,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 
 /// \brief    Computes the derivative of the pseudorange with respect 
 ///           to X, Y, Z. Also computes the user to satellite range for 
@@ -50,7 +51,7 @@ extern "C" {
 /// \date     2005-08-23
 /// \since    2005-08-23
 /// 
-void NAVIGATION_ComputeDerivativesOf_Range_WithRespectTo_XYZ( 
+void GNSSTK_API NAVIGATION_ComputeDerivativesOf_Range_WithRespectTo_XYZ(
   const double x,     //!< User X coordinate WGS84 ECEF      [m]
   const double y,     //!< User Y coordinate WGS84 ECEF      [m]
   const double z,     //!< User Z coordinate WGS84 ECEF      [m]
@@ -72,7 +73,7 @@ void NAVIGATION_ComputeDerivativesOf_Range_WithRespectTo_XYZ(
 /// \date     2005-08-23
 /// \since    2005-08-23
 /// 
-void NAVIGATION_ComputeDerivativesOf_Range_WithRespectToLatitudeLongitudeHeight( 
+void GNSSTK_API NAVIGATION_ComputeDerivativesOf_Range_WithRespectToLatitudeLongitudeHeight(
   const double latitude,  //!< User geodetic latitude                   [rad]
   const double longitude, //!< User geodetic longtiude                  [rad]
   const double height,    //!< User geodetic height                     [m]
@@ -105,7 +106,7 @@ void NAVIGATION_ComputeDerivativesOf_Range_WithRespectToLatitudeLongitudeHeight(
 /// [1] Mezentsev, O. and J. Collin (2004). A Closed Form Solution Of Non-Linear GPS 
 ///     Pseudorange Equations. White paper proof - not published.
 /// 
-int NAVIGATION_PerformClosedFormPositionSolution_FromPseuodrangeMeasurements(
+int GNSSTK_API NAVIGATION_PerformClosedFormPositionSolution_FromPseuodrangeMeasurements(
   double p1,          //!< 1st raw pseudorange measurement [m]
   double p2,          //!< 2nd raw pseudorange measurement [m]
   double p3,          //!< 3rd raw pseudorange measurement [m]

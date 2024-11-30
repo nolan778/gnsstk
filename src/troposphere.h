@@ -51,6 +51,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 
 /// Computes the dry and wet mapping function values based on the UNBabc
 /// model in the reference below.
@@ -63,7 +64,7 @@ extern "C" {
 /// [1] Guo, J. and R. B. Langely 2003. A New Tropospheric Propagation Delay Mapping Function for 
 ///     Elevation Angles Down to 2 degrees. ION GPS 2003, 9-12 Sept. 2003, Portland OR
 /// 
-void TROPOSPHERE_GetDayAndWetMappingValues_UsingThe_UNBabc_Model( 
+void GNSSTK_API TROPOSPHERE_GetDayAndWetMappingValues_UsingThe_UNBabc_MappingFunction(
   const double elevation,  //!< satellite elevation angle                     [rad]
   const double latitude,   //!< user latitude                                 [rad]
   const double height,     //!< user height (orthometric, ie above sea level) [m]
@@ -83,7 +84,7 @@ void TROPOSPHERE_GetDayAndWetMappingValues_UsingThe_UNBabc_Model(
 ///     AUGMENTATION SYSTEM AIRBORNE EQUIPMENT. RTCA/DO-229C. Prepared by SC-159. November 28, 2001. 
 ///     Supersedes DO-229B. Available at http://www.rtca.org/doclist.asp . pp. 338-340 of 586 in PDF
 /// 
-void TROPOSPHERE_DetermineZenithDelayValues_WAAS_Model(
+void GNSSTK_API TROPOSPHERE_DetermineZenithDelayValues_WAAS_Model(
   const double latitude,          //!< user latitude        [rad]
   const double height,            //!< user height          [m]
   const unsigned short dayofyear, //!< day of year (1-366)  [days]    
@@ -103,7 +104,7 @@ void TROPOSPHERE_DetermineZenithDelayValues_WAAS_Model(
 /// [1] Guo, J. and R. B. Langely 2003. A New Tropospheric Propagation Delay Mapping Function for 
 ///     Elevation Angles Down to 2 degrees. ION GPS 2003, 9-12 Sept. 2003, Portland OR
 /// 
-void TROPOSPHERE_GetDryAndWetDelay_UsingThe_UNBabc_MappingFunction(  
+void GNSSTK_API TROPOSPHERE_GetDryAndWetDelay_UsingThe_UNBabc_MappingFunction(
   const double zenith_dry_delay,  //!< dry zenith delay                              [m]
   const double zenith_wet_delay,  //!< wet zenith delay                              [m]
   const double elevation,         //!< satellite elevation angle (must be >= 2 deg)  [rad]

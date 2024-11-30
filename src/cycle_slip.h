@@ -44,6 +44,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 /**
@@ -57,7 +58,7 @@ extern "C" {
 
 \return  TRUE if successful, false otherwise.
 */
-BOOL CYCLESLIP_CheckForCycleSlipUsingPhaseRatePrediction(
+BOOL GNSSTK_API CYCLESLIP_CheckForCycleSlipUsingPhaseRatePrediction(
   unsigned short previous_week, //!< The previous measurement gps week [weeks].
   double   previous_tow,        //!< The previous measurement gps time of week [s].  
   double   previous_Doppler,    
@@ -81,7 +82,7 @@ BOOL CYCLESLIP_CheckForCycleSlipUsingPhaseRatePrediction(
 return  TRUE if successful, false otherwise.
 */
 
-BOOL CYCLESLIP_CheckForCycleSlipUsingDualFrequencyPhase(
+BOOL GNSSTK_API CYCLESLIP_CheckForCycleSlipUsingDualFrequencyPhase(
   double   adr_Frequency1, //!< Add comments
   double   adr_Frequency2,
   double   wavelength1,
@@ -102,7 +103,7 @@ BOOL CYCLESLIP_CheckForCycleSlipUsingDualFrequencyPhase(
 
 return  TRUE if successful, false otherwise.
 */
-BOOL CYCLESLIP_CheckForCycleSlipUsingTripleDifferencePhase(
+BOOL GNSSTK_API CYCLESLIP_CheckForCycleSlipUsingTripleDifferencePhase(
     unsigned short current_week, 
   double   current_tow,
   unsigned short previous_week, 

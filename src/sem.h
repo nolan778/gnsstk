@@ -41,6 +41,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -96,7 +97,7 @@ typedef struct
 /// \since    2005-08-14
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL SEM_ReadAlmanacDataFromFile(
+BOOL GNSSTK_API SEM_ReadAlmanacDataFromFile(
   const char* semFilePath,    //!< path to the input SEM ASCII file
   SEM_structAlmanac* alm,     //!< pointer to an array of SEM almanac structs
   unsigned char  max_to_read, //!< length of the array
@@ -111,7 +112,7 @@ BOOL SEM_ReadAlmanacDataFromFile(
 /// \since    2005-08-15
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL SEM_WriteAlmanacDataToFile(
+BOOL GNSSTK_API SEM_WriteAlmanacDataToFile(
   const char* semFilePath,       //!< path to the output SEM ASCII file
   SEM_structAlmanac* alm,        //!< pointer to an array of SEM almanac structs
   unsigned char number_to_write  //!< length of the array
@@ -125,7 +126,7 @@ BOOL SEM_WriteAlmanacDataToFile(
 /// \since    2005-08-15
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL SEM_WriteSingleAlmanacElementToBuffer(
+BOOL GNSSTK_API SEM_WriteSingleAlmanacElementToBuffer(
   SEM_structAlmanac alm,    //!< SEM almanac struct
   char* buffer,              //!< buffer to write the SEM struct information
   unsigned short bufferSize  //!< size of the buffer, must be greater than 1024 bytes

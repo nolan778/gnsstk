@@ -41,6 +41,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -95,7 +96,7 @@ typedef struct
 /// \since    2005-08-14
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL YUMA_ReadAlmanacDataFromFile(
+BOOL GNSSTK_API YUMA_ReadAlmanacDataFromFile(
   const char* yumaFilePath,   //!< path to the input YUMA ASCII file
   YUMA_structAlmanac* alm,    //!< pointer to an array of YUMA almanac structs
   unsigned char  max_to_read, //!< length of the array
@@ -110,7 +111,7 @@ BOOL YUMA_ReadAlmanacDataFromFile(
 /// \since    2005-08-14
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL YUMA_WriteAlmanacDataToFile(
+BOOL GNSSTK_API YUMA_WriteAlmanacDataToFile(
   const char* yumaFilePath,      //!< path to the output YUMA ASCII file
   YUMA_structAlmanac* alm,       //!< pointer to an array of YUMA almanac structs
   unsigned char number_to_write  //!< length of the array
@@ -124,7 +125,7 @@ BOOL YUMA_WriteAlmanacDataToFile(
 /// \since    2005-08-15
 /// \return   TRUE(1) if successful, FALSE(0) otherwise
 /// 
-BOOL YUMA_WriteSingleAlmanacElementToBuffer(
+BOOL GNSSTK_API YUMA_WriteSingleAlmanacElementToBuffer(
   YUMA_structAlmanac alm,   //!< YUMA almanac struct
   char* buffer,             //!< buffer to write the YUMA struct information
   unsigned short bufferSize //!< size of the buffer, must be greater than 1024 bytes

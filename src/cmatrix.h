@@ -53,6 +53,8 @@ extern "C"
 {
 #endif
 
+#include "gnsstk.h"
+
 typedef int BOOL;
 
 #ifndef FALSE
@@ -84,7 +86,7 @@ typedef struct
 /// \brief  This function must be called first by users of cmatrix!
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Initialize_MTXEngine();
+BOOL GNSSTK_API MTX_Initialize_MTXEngine();
 
 
 /// \brief  This function is used to set if matrices that are single 
@@ -93,33 +95,33 @@ BOOL MTX_Initialize_MTXEngine();
 ///         BY DEFAULT.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Enable1x1MatricesForTreatmentAsScalars( BOOL enable );
+BOOL GNSSTK_API MTX_Enable1x1MatricesForTreatmentAsScalars( BOOL enable );
 
 /// \brief  Is this a null matrix?
 ///
 /// \return TRUE if the matrix is null, FALSE otherwise.
-BOOL MTX_isNull( const MTX *M );
+BOOL GNSSTK_API MTX_isNull( const MTX *M );
 
 
 /// \brief  Are matrices A & B conformal for multiplication, real * real
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_isConformalForMultiplication( const MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_isConformalForMultiplication( const MTX *A, const MTX *B );
 
 /// \brief  Are matrices A & B conformat for addition/subtraction, real + real
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_isConformalForAddition( const MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_isConformalForAddition( const MTX *A, const MTX *B );
 
 /// \brief  Is this a square matrix?
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_isSquare( const MTX *A );
+BOOL GNSSTK_API MTX_isSquare( const MTX *A );
 
 /// \brief  are A and B the same size?
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_isSameSize( const MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_isSameSize( const MTX *A, const MTX *B );
 
 /// \brief  Initialize a MTX matrix struct to appropriate zero values. This must always be called for proper operation!
 /// \code
@@ -128,188 +130,188 @@ BOOL MTX_isSameSize( const MTX *A, const MTX *B );
 /// \endcode
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Init( MTX *M );
+BOOL GNSSTK_API MTX_Init( MTX *M );
 
 
 
 /// \brief  Set the matrix comment string
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetComment( MTX *M, const char *comment );
+BOOL GNSSTK_API MTX_SetComment( MTX *M, const char *comment );
 
 /// \brief  Clear the matrix data from memory if dynamically allocated. Zero the struct members.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Free( MTX *M );
+BOOL GNSSTK_API MTX_Free( MTX *M );
 
 /// \brief  Allocate matrix data (set to zero).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Calloc( MTX *M, const unsigned nrows, const unsigned ncols, const BOOL isReal );
+BOOL GNSSTK_API MTX_Calloc( MTX *M, const unsigned nrows, const unsigned ncols, const BOOL isReal );
 
 /// \brief  Allocate matrix data (not set to zero).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Malloc( MTX *M, const unsigned nrows, const unsigned ncols, const BOOL isReal );
+BOOL GNSSTK_API MTX_Malloc( MTX *M, const unsigned nrows, const unsigned ncols, const BOOL isReal );
 
 /// \brief  Set a scalar value in the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetValue( MTX *M, const unsigned row, const unsigned col, const double value );
+BOOL GNSSTK_API MTX_SetValue( MTX *M, const unsigned row, const unsigned col, const double value );
 
 /// \brief  Set a complex value in the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetComplexValue( MTX *M, const unsigned row, const unsigned col, const double re, const double im );
+BOOL GNSSTK_API MTX_SetComplexValue( MTX *M, const unsigned row, const unsigned col, const double re, const double im );
 
 /// \brief  Matrix M = Re + Im*i, where Re and Im are real matrices.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Complex( MTX *M, const MTX *Re, const MTX *Im );
+BOOL GNSSTK_API MTX_Complex( MTX *M, const MTX *Re, const MTX *Im );
 
 /// \brief  Set the specified column in Matrix M to Re + Im*i, where Re and Im are real matrices.
 /// The dimensions of M must already be valid.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetComplexColumn( MTX *M, const unsigned col, const MTX *Re, const MTX *Im );
+BOOL GNSSTK_API MTX_SetComplexColumn( MTX *M, const unsigned col, const MTX *Re, const MTX *Im );
 
 /// \brief  Convert a real matrix to a complex matrix
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ConvertRealToComplex( MTX *M );
+BOOL GNSSTK_API MTX_ConvertRealToComplex( MTX *M );
 
 /// \brief  Convert a complex marix to a real matrix using only the imaginary component A = real(B).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ConvertComplexToReal( MTX *M );
+BOOL GNSSTK_API MTX_ConvertComplexToReal( MTX *M );
 
 /// \brief  Convert a complex marix to a real matrix using only the imaginary component A = imag(B).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ConvertComplexToImag( MTX *M );
+BOOL GNSSTK_API MTX_ConvertComplexToImag( MTX *M );
 
 /// \brief  Extract the real component of matrix M.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Real( const MTX *M, MTX *Re );
+BOOL GNSSTK_API MTX_Real( const MTX *M, MTX *Re );
 
 /// \brief  Check if the matrix contains only real values. 
 /// Alter the matrix if it is stored as complex and only has real values.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_isReal( MTX *M, BOOL *isReal );
+BOOL GNSSTK_API MTX_isReal( MTX *M, BOOL *isReal );
 
 /// \brief  Extract the real component of column col of matrix M.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RealColumn( const MTX *M, const unsigned col, MTX *Re );
+BOOL GNSSTK_API MTX_RealColumn( const MTX *M, const unsigned col, MTX *Re );
 
 /// \brief  Extract the imaginary component of matrix M.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Imag( const MTX *M, MTX *Im );
+BOOL GNSSTK_API MTX_Imag( const MTX *M, MTX *Im );
 
 /// \brief  Extract the imaginary component of column col of matrix M.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ImagColumn( const MTX *M, const unsigned col, MTX *Im );
+BOOL GNSSTK_API MTX_ImagColumn( const MTX *M, const unsigned col, MTX *Im );
 
 /// \brief  If M is a real matrix, Magnitude is a copy.
 /// If M is a complex matrix, Magnitude is a real matrix = sqrt( re*re + im*im ).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Magnitude( const MTX *M, MTX *Magnitude );
+BOOL GNSSTK_API MTX_Magnitude( const MTX *M, MTX *Magnitude );
 
 /// \brief  If M is a real matrix, Phase is a zero matrix.
 /// If M is a complex matrix, Phase is a real matrix = atan2(im,re).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Phase( const MTX *M, MTX *Phase );
+BOOL GNSSTK_API MTX_Phase( const MTX *M, MTX *Phase );
 
 /// \brief  If M is a real matrix, nothing is done.
 /// If M is a complex matrix, the conjugate is set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Conjugate( MTX *M );
+BOOL GNSSTK_API MTX_Conjugate( MTX *M );
 
 /// \brief  Remove a single column from the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RemoveColumn( MTX *M, const unsigned col );
+BOOL GNSSTK_API MTX_RemoveColumn( MTX *M, const unsigned col );
 
 /// \brief  remove all the columns 'after' the column index given.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RemoveColumnsAfterIndex( MTX *dst, const unsigned col );
+BOOL GNSSTK_API MTX_RemoveColumnsAfterIndex( MTX *dst, const unsigned col );
 
 /// \brief  insert a column into another matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_InsertColumn( MTX *dst, const MTX *src, const unsigned dst_col, const unsigned src_col );
+BOOL GNSSTK_API MTX_InsertColumn( MTX *dst, const MTX *src, const unsigned dst_col, const unsigned src_col );
 
 /// \brief  Add a column to the Matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_AddColumn( MTX *dst, const MTX *src, const unsigned src_col );
+BOOL GNSSTK_API MTX_AddColumn( MTX *dst, const MTX *src, const unsigned src_col );
 
 /// \brief  Combine two matrices with the same nrows, A becomes A|B,
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Concatonate( MTX *dst, const MTX *src );
+BOOL GNSSTK_API MTX_Concatonate( MTX *dst, const MTX *src );
 
 /// \brief  A becomes A|0|0|0|.. etc      
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_AddZeroValuedColumns( MTX *dst, const unsigned nr_new_cols );
+BOOL GNSSTK_API MTX_AddZeroValuedColumns( MTX *dst, const unsigned nr_new_cols );
 
 
 /// \brief  Redimension the matrix, original data is saved in place, new data is set to zero.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Redim( MTX *dst, const unsigned nrows, const unsigned ncols );
+BOOL GNSSTK_API MTX_Redim( MTX *dst, const unsigned nrows, const unsigned ncols );
 
 /// \brief  Resize the matrix, original data is lost, new data is set to zero, must specify if the matrix is real or complex.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Resize( MTX *dst, const unsigned nrows, const unsigned ncols, const BOOL isReal );
+BOOL GNSSTK_API MTX_Resize( MTX *dst, const unsigned nrows, const unsigned ncols, const BOOL isReal );
 
 
 
 /// \brief  Copy the src data to dst matrix, resize dst if possible & necessary.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Copy( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_Copy( const MTX *src, MTX *dst );
 
 /// \brief  Copy the src matrix data [m cols x n rows] to dst vector [1 col x m*n rows], resize dst if possible & necessary.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_CopyIntoColumnWiseVector( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_CopyIntoColumnWiseVector( const MTX *src, MTX *dst );
 
 /// \brief  Set the dst matrix from the static 'c' style matrix indexed by mat[i*ncols + j].
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetFromStaticMatrix( MTX *dst, const double mat[], const unsigned nrows, const unsigned ncols );
+BOOL GNSSTK_API MTX_SetFromStaticMatrix( MTX *dst, const double mat[], const unsigned nrows, const unsigned ncols );
 
 /// \brief  Copy the src data in column col to dst matrix, resize dst if possible & necessary.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_CopyColumn( const MTX *src, const unsigned col, MTX *dst );
+BOOL GNSSTK_API MTX_CopyColumn( const MTX *src, const unsigned col, MTX *dst );
 
 /// \brief  Copy the src data in row, row, to dst matrix, resize dst if possible & necessary.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_CopyRow( const MTX *src, const unsigned row, MTX *dst );
+BOOL GNSSTK_API MTX_CopyRow( const MTX *src, const unsigned row, MTX *dst );
 
 /// \brief  Copy the src data in row 'row' (1xn) to dst matrix (nx1), resize dst if possible & necessary.
 /// dst becomes (nx1).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_CopyRowIntoAColumnMatrix( const MTX *src, const unsigned row, MTX *dst );
+BOOL GNSSTK_API MTX_CopyRowIntoAColumnMatrix( const MTX *src, const unsigned row, MTX *dst );
 
 /// \brief  Insert a submatrix (src) into dst, starting at indices dst(row,col).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_InsertSubMatrix( MTX *dst, const MTX *src, const unsigned dst_row, const unsigned dst_col );
+BOOL GNSSTK_API MTX_InsertSubMatrix( MTX *dst, const MTX *src, const unsigned dst_row, const unsigned dst_col );
 
 /**
 \brief  Extract a submatrix (dst) from this matrix from (inclusive) 
@@ -328,7 +330,7 @@ result = MTX_ExtractSubMatrix( &A, &B, 1, 0, 2, 2 );
 
 \return TRUE if successful, FALSE otherwise.
 */
-BOOL MTX_ExtractSubMatrix( 
+BOOL GNSSTK_API MTX_ExtractSubMatrix( 
   const MTX* src,          //!< The source matrix.                        
   MTX* dst,                //!< The destination matrix to contain the submatrix.
   const unsigned from_row, //!< The zero-based index for the from row.
@@ -341,78 +343,78 @@ BOOL MTX_ExtractSubMatrix(
 /// \brief  Zero the entire matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Zero( MTX *dst );
+BOOL GNSSTK_API MTX_Zero( MTX *dst );
 
 /// \brief  Zero all elements in a specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ZeroColumn( MTX *dst, const unsigned col );
+BOOL GNSSTK_API MTX_ZeroColumn( MTX *dst, const unsigned col );
 
 /// \brief  Zero all elements in a specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ZeroRow( MTX *dst, const unsigned row );
+BOOL GNSSTK_API MTX_ZeroRow( MTX *dst, const unsigned row );
 
 /// \brief  Fill the matrix with the given value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Fill( MTX *dst, const double value );
+BOOL GNSSTK_API MTX_Fill( MTX *dst, const double value );
 
 /// \brief  Fill the matrix with the given complex value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FillComplex( MTX *dst, const double re, const double im );
+BOOL GNSSTK_API MTX_FillComplex( MTX *dst, const double re, const double im );
 
 /// \brief  Fill the matrix column with the given value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FillColumn( MTX *dst, const unsigned col, const double value );
+BOOL GNSSTK_API MTX_FillColumn( MTX *dst, const unsigned col, const double value );
 
 /// \brief  Fill the matrix column with the given complex value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FillColumnComplex( MTX *dst, const unsigned col, const double re, const double im );
+BOOL GNSSTK_API MTX_FillColumnComplex( MTX *dst, const unsigned col, const double re, const double im );
 
 /// \brief  Fill the matrix row with the given value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FillRow( MTX *dst, const unsigned row, const double value );
+BOOL GNSSTK_API MTX_FillRow( MTX *dst, const unsigned row, const double value );
 
 /// \brief  Fill the matrix row with the given complex value.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FillRowComplex( MTX *dst, const unsigned row, const double re, const double im );
+BOOL GNSSTK_API MTX_FillRowComplex( MTX *dst, const unsigned row, const double re, const double im );
 
 /// \brief  Reverse the order of elements of a column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FlipColumn( MTX *M, const unsigned col );
+BOOL GNSSTK_API MTX_FlipColumn( MTX *M, const unsigned col );
 
 /// \brief  Reverse the order of elements of a row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FlipRow( MTX *M, const unsigned row );
+BOOL GNSSTK_API MTX_FlipRow( MTX *M, const unsigned row );
 
 /// \brief  Set the matrix to an identity.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Identity( MTX *dst );
+BOOL GNSSTK_API MTX_Identity( MTX *dst );
 
 /// \brief  Force this square matrix to be symmetric 
 ///         by M = (M + T.())/2 using minimal operations.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ForceSymmetric( MTX *M );
+BOOL GNSSTK_API MTX_ForceSymmetric( MTX *M );
 
 /// \brief  Transpose the matrix src into the matris dst.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Transpose( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_Transpose( const MTX *src, MTX *dst );
 
 /// \brief  Transpose the matrix as an inplace operation.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TransposeInplace( MTX *M );
+BOOL GNSSTK_API MTX_TransposeInplace( MTX *M );
 
 
 /// \brief  Round the matrix elements to the specified precision.\n
@@ -423,35 +425,35 @@ BOOL MTX_TransposeInplace( MTX *M );
 /// precision has a maximum of 32. After which no rounding occurs.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Round( MTX *M, const unsigned precision );
+BOOL GNSSTK_API MTX_Round( MTX *M, const unsigned precision );
 
 /// \brief  Round the matrix elements to the nearest integers towards minus infinity.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Floor( MTX *M );
+BOOL GNSSTK_API MTX_Floor( MTX *M );
 
 /// \brief  Round the matrix elements to the nearest integers towards infinity.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Ceil( MTX *M );
+BOOL GNSSTK_API MTX_Ceil( MTX *M );
 
 /// \brief  Round the matrix elements to the nearest integers towards zero. 
 ///         Sometimes known as trunc().
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Fix( MTX *M );
+BOOL GNSSTK_API MTX_Fix( MTX *M );
 
 
 /// \brief  Set the destination matrix to be 1.0 minus the source matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_OneMinus( const MTX* src, MTX *dst );
+BOOL GNSSTK_API MTX_OneMinus( const MTX* src, MTX *dst );
 
 
 /// \brief  Determine the matrix file delimiter and if a comment line is available.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DetermineFileDelimiter( 
+BOOL GNSSTK_API MTX_DetermineFileDelimiter( 
   const char *path,    //!< path to the input file
   char *delimiter,     //!< delimiter, 'b' is binary
   BOOL *hasComment,    //!< BOOL to indicate if a comment line is present
@@ -461,18 +463,18 @@ BOOL MTX_DetermineFileDelimiter(
 /// \brief  Determine the size of a file.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DetermineFileSize( const char *path, unsigned *size );
+BOOL GNSSTK_API MTX_DetermineFileSize( const char *path, unsigned *size );
 
 /// \brief  Determine the number of columns in the data string provided.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DetermineNumberOfColumnsInDataString( const char *datastr, unsigned *ncols );
+BOOL GNSSTK_API MTX_DetermineNumberOfColumnsInDataString( const char *datastr, unsigned *ncols );
 
 /// \brief  Determine the number of columns in the complex data string provided. 
 /// The delimiter is needed, 'w' indicates whitespace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DetermineNumberOfColumnsInDataStringCplx( const char *datastr, const char delimiter, unsigned *ncols );
+BOOL GNSSTK_API MTX_DetermineNumberOfColumnsInDataStringCplx( const char *datastr, const char delimiter, unsigned *ncols );
 
 
 
@@ -480,20 +482,20 @@ BOOL MTX_DetermineNumberOfColumnsInDataStringCplx( const char *datastr, const ch
 /// This function will also read in MTX BINARY formatted files.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ReadFromFileRealOnly( MTX *M, const char *path );
+BOOL GNSSTK_API MTX_ReadFromFileRealOnly( MTX *M, const char *path );
 
 
 /// \brief  Read either a real or complex matrix from a file (ASCII formatted, any common delimiters).
 /// This function will also read in MTX BINARY formatted files.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ReadFromFile( MTX *M, const char *path );
+BOOL GNSSTK_API MTX_ReadFromFile( MTX *M, const char *path );
 
 
 /// \brief  Set the matrix from a matrix string.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetFromMatrixString( MTX *M, const char *strMatrix );
+BOOL GNSSTK_API MTX_SetFromMatrixString( MTX *M, const char *strMatrix );
 
 
 
@@ -501,7 +503,7 @@ BOOL MTX_SetFromMatrixString( MTX *M, const char *strMatrix );
 /// analogous to sprintf( ValueBuffer, "%'blank''-'width.precision'g'", value );
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ValueToString( 
+BOOL GNSSTK_API MTX_ValueToString( 
   const double value,             //!< The double value to output.
   const unsigned width,           //!< The width of the field.
   const unsigned precision,       //!< The precision, %g style.
@@ -515,48 +517,48 @@ BOOL MTX_ValueToString(
 /// MTX_PrintAutoWidth is recommended over this function, "%'blank''-'width.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Print( const MTX *M, const char *path, const unsigned width, const unsigned precision, const BOOL append );
+BOOL GNSSTK_API MTX_Print( const MTX *M, const char *path, const unsigned width, const unsigned precision, const BOOL append );
 
 /// \brief  Print the matrix to a buffer of maxlength with specifed width and precision.
 /// MTX_PrintAutoWidth is recommended over this function, "%'blank''-'width.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Print_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned width, const unsigned precision );
+BOOL GNSSTK_API MTX_Print_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned width, const unsigned precision );
 
 /// \brief  Print the matrix to a file with automatically determined column width.
 /// and the specified precision, uses "%'blank''-'autowidth.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintAutoWidth( const MTX *M, const char *path, const unsigned precision, const BOOL append );
+BOOL GNSSTK_API MTX_PrintAutoWidth( const MTX *M, const char *path, const unsigned precision, const BOOL append );
 
 /// \brief  Print the matrix to stdout with automatically determined column width.
 /// and the specified precision, uses "%'blank''-'autowidth.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintStdoutAutoWidth( const MTX *M, const unsigned precision );
+BOOL GNSSTK_API MTX_PrintStdoutAutoWidth( const MTX *M, const unsigned precision );
 
 /// \brief  Print the matrix to a buffer of maxlenth with automatically determined column width.
 /// and the specified precision, uses "%'blank''-'autowidth.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintAutoWidth_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned precision );
+BOOL GNSSTK_API MTX_PrintAutoWidth_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned precision );
 
 /// \brief  Print the matrix to a file with specifed precision and delimiter.
 /// Use MTX_PrintAutoWidth if print using whitespace as a delimiter is required, uses "%.precision'g'"
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintDelimited( const MTX *M, const char *path, const unsigned precision, const char delimiter, const BOOL append );
+BOOL GNSSTK_API MTX_PrintDelimited( const MTX *M, const char *path, const unsigned precision, const char delimiter, const BOOL append );
 
 /// \brief  Print the matrix to a file with specifed precision and delimiter.
 /// Use MTX_PrintAutoWidth if print using whitespace as a delimiter is required, uses "%.precision'g'".
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintDelimited_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned precision, const char delimiter );
+BOOL GNSSTK_API MTX_PrintDelimited_ToBuffer( const MTX *M, char *buffer, const unsigned maxlength, const unsigned precision, const char delimiter );
 
 /// \brief  Print a row to a string buffer.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PrintRowToString( const MTX *M, const unsigned row, char *buffer, const unsigned maxlength, const int width, const int precision );
+BOOL GNSSTK_API MTX_PrintRowToString( const MTX *M, const unsigned row, char *buffer, const unsigned maxlength, const int width, const int precision );
 
 
 ////
@@ -565,232 +567,232 @@ BOOL MTX_PrintRowToString( const MTX *M, const unsigned row, char *buffer, const
 /// \brief  Adds a scalar double to matrix M, ie: M += 5.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Add_Scalar( MTX *M, const double scalar );
+BOOL GNSSTK_API MTX_Add_Scalar( MTX *M, const double scalar );
 
 /// \brief  Adds a scalar complex to matrix M, ie: M += (5 + 3i).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Add_ScalarComplex( MTX *M, const double re, const double im );
+BOOL GNSSTK_API MTX_Add_ScalarComplex( MTX *M, const double re, const double im );
 
 /// \brief  Subtracts a scalar double from matrix M, ie: M -= 5.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Subtract_Scalar( MTX *M, const double scalar );
+BOOL GNSSTK_API MTX_Subtract_Scalar( MTX *M, const double scalar );
 
 /// \brief  Subtracts a scaler complex from matrix M, ie: M -= (5+3i).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Subtract_ScalarComplex( MTX *M, const double re, const double im );
+BOOL GNSSTK_API MTX_Subtract_ScalarComplex( MTX *M, const double re, const double im );
 
 /// \brief  Multiply M with a double scalar inplace, ie: M *= 5.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Multiply_Scalar( MTX *M, const double scalar );
+BOOL GNSSTK_API MTX_Multiply_Scalar( MTX *M, const double scalar );
 
 /// \brief  Multiply M with a complex scalar inplace, ie: M *= (5+3i).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Multiply_ScalarComplex( MTX *M, const double re, const double im );
+BOOL GNSSTK_API MTX_Multiply_ScalarComplex( MTX *M, const double re, const double im );
 
 /// \brief  Divide M by scaler double inplace, ie: M /= 5.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Divide_Scalar( MTX *M, const double scalar );
+BOOL GNSSTK_API MTX_Divide_Scalar( MTX *M, const double scalar );
 
 /// \brief  Divide M by scaler complex inplace, ie: M /= (5+3i).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Divide_ScalarComplex( MTX *M, const double re, const double im );
+BOOL GNSSTK_API MTX_Divide_ScalarComplex( MTX *M, const double re, const double im );
 
 /// \brief  Change the sign of all the data in the matrix. M *= -1.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Negate( MTX *M );
+BOOL GNSSTK_API MTX_Negate( MTX *M );
 
 
 /// \brief  Computes the absolute value of each element in the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Abs( MTX *M );
+BOOL GNSSTK_API MTX_Abs( MTX *M );
 
 /// \brief  Compute the arc-cosine of each element of the matrix inplace.
 ///         Complex results are obtained if elements are greater than abs(1).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_acos( MTX *M );
+BOOL GNSSTK_API MTX_acos( MTX *M );
 
 /// \brief  Compute the phase angle in radians of the elements in the matrix.
 /// If all elements are real, the results are 0.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_angle( MTX *M );
+BOOL GNSSTK_API MTX_angle( MTX *M );
 
 /// \brief  Compute the arc-sine of each element of the matrix inplace.
 ///         Complex results are obtained if elements are greater than abs(1).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_asin( MTX *M );
+BOOL GNSSTK_API MTX_asin( MTX *M );
 
 
 /// \brief  Computes the value^2 of each element in the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Sqr( MTX *M );
+BOOL GNSSTK_API MTX_Sqr( MTX *M );
 
 /// \brief  Computes the sqrt(value) of each element in the matrix.
 /// A real matrix is converted to complex if any elements are negative.
 /// e.g. sqrt(-1) = -i.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Sqrt( MTX *M );
+BOOL GNSSTK_API MTX_Sqrt( MTX *M );
 
 /// \brief  If real, computes the exp(value) of each element in the matrix.
 /// If complex, computes exp(M) = exp(real)*(cos(imag)+i*sin(imag)).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Exp( MTX *M );
+BOOL GNSSTK_API MTX_Exp( MTX *M );
 
 /// \brief  Create an indentity matrix with nrows and ncols.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Eye( MTX *M, const unsigned nrows, const unsigned ncols );
+BOOL GNSSTK_API MTX_Eye( MTX *M, const unsigned nrows, const unsigned ncols );
 
 /// \brief  Computes the natural logarithm, ln(value) of each element in the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Ln( MTX *M );
+BOOL GNSSTK_API MTX_Ln( MTX *M );
 
 /// \brief  Raise all elements in src^(power_re + power_im*i) and store in dst.
 /// If power is just real, power_im = 0.0.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Pow( const MTX *src, MTX *dst, const double power_re, const double power_im );
+BOOL GNSSTK_API MTX_Pow( const MTX *src, MTX *dst, const double power_re, const double power_im );
 
 /// \brief  Raise all elements in src^(power_re + power_im*i).
 /// If power is just real, power_im = 0.0.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PowInplace( MTX *src, const double power_re, const double power_im );
+BOOL GNSSTK_API MTX_PowInplace( MTX *src, const double power_re, const double power_im );
 
 
 /// \brief  Computes the arctan, atan(value) of each element in the matrix
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_atan( MTX *M );
+BOOL GNSSTK_API MTX_atan( MTX *M );
 
 /// \brief  Add +1.0 to all elements, e.g. M++.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Increment( MTX *M );
+BOOL GNSSTK_API MTX_Increment( MTX *M );
 
 /// \brief  Subtract 1.0 from all elements, e.g. M--.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Decrement( MTX *M );
+BOOL GNSSTK_API MTX_Decrement( MTX *M );
 
 /// \brief  Add A += B, inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Add_Inplace( MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_Add_Inplace( MTX *A, const MTX *B );
 
 /// \brief  Subtract A -= B, inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Subtract_Inplace( MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_Subtract_Inplace( MTX *A, const MTX *B );
 
 /// \brief  Multiply A = B*A, inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PreMultiply_Inplace( MTX *A, const MTX *B ); // A = B*A
+BOOL GNSSTK_API MTX_PreMultiply_Inplace( MTX *A, const MTX *B ); // A = B*A
 
 /// \brief  Multiply A = tranpose(B)*A, inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TransposePreMultiply_Inplace( MTX *A, const MTX *B ); // A = tranpose(B)*A
+BOOL GNSSTK_API MTX_TransposePreMultiply_Inplace( MTX *A, const MTX *B ); // A = tranpose(B)*A
 
 /// \brief  Multiply A = A*B, inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PostMultiply_Inplace( MTX *A, const MTX* B ); // A = A*B
+BOOL GNSSTK_API MTX_PostMultiply_Inplace( MTX *A, const MTX* B ); // A = A*B
 
 /// \brief  Multiply A = A*transpose(B), inplace.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PostMultiplyTranspose_Inplace( MTX *A, const MTX* B ); // A = A*tranpose(B)
+BOOL GNSSTK_API MTX_PostMultiplyTranspose_Inplace( MTX *A, const MTX* B ); // A = A*tranpose(B)
 
 
 /// \brief  Dot multiply A .*= B, inplace (A.data[col][row] = A.data[col][row]*B.data[col][row]).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DotMultiply_Inplace( MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_DotMultiply_Inplace( MTX *A, const MTX *B );
 
 /// \brief  Dot divide A ./= B, inplace (A.data[col][row] = A.data[col][row]/B.data[col][row]).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_DotDivide_Inplace( MTX *A, const MTX *B );
+BOOL GNSSTK_API MTX_DotDivide_Inplace( MTX *A, const MTX *B );
 
 
 
 /// \brief  Add A = B+C.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Add( MTX *A, const MTX *B, const MTX *C );
+BOOL GNSSTK_API MTX_Add( MTX *A, const MTX *B, const MTX *C );
 
 /// \brief  Subtract A = B-C.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Subtract( MTX *A, const MTX *B, const MTX *C );
+BOOL GNSSTK_API MTX_Subtract( MTX *A, const MTX *B, const MTX *C );
 
 /// \brief  Multiply A = B*C.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Multiply( MTX *A, const MTX *B, const MTX *C );
+BOOL GNSSTK_API MTX_Multiply( MTX *A, const MTX *B, const MTX *C );
 
 /// \brief  Multiply A = transpose(B)*C.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TransposeMultiply( MTX *A, const MTX* B, const MTX* C );
+BOOL GNSSTK_API MTX_TransposeMultiply( MTX *A, const MTX* B, const MTX* C );
 
 /// \brief  Multiply A = B*transpose(C).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MultiplyTranspose( MTX *A, const MTX* B, const MTX* C ); // A = B*transpose(C)
+BOOL GNSSTK_API MTX_MultiplyTranspose( MTX *A, const MTX* B, const MTX* C ); // A = B*transpose(C)
 
 /// \brief  Rest if A == B to within the specified tolerance.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IsEqual( const MTX *A, const MTX *B, const double tolerance, BOOL *isEqual );
+BOOL GNSSTK_API MTX_IsEqual( const MTX *A, const MTX *B, const double tolerance, BOOL *isEqual );
 
 
 /// \brief  Add this matrix and an identity matrix. Adds 1.0 to the diagonal even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_AddIdentity( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_AddIdentity( const MTX *src, MTX *dst );
 
 /// \brief  Add this matrix and an identity matrix. Adds 1.0 to the diagonal even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_AddIdentity_Inplace( MTX *src );
+BOOL GNSSTK_API MTX_AddIdentity_Inplace( MTX *src );
 
 /// \brief  Subtract an identity matrix from this matrix. Subtracts 1.0 from the diagonal even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinusIdentity( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_MinusIdentity( const MTX *src, MTX *dst );
 
 /// \brief  Subtract an identity matrix from this matrix. Subtracts 1.0 from the diagonal even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinusIdentity_Inplace( MTX *src );
+BOOL GNSSTK_API MTX_MinusIdentity_Inplace( MTX *src );
 
 /// \brief  Subtract this matrix from an identity matrix. Subtracts the diagonal from 1.0 even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IdentityMinus( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_IdentityMinus( const MTX *src, MTX *dst );
 
 /// \brief  Subtract this matrix from an identity matrix. Subtracts the diagonal from 1.0 even if not square.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IdentityMinus_Inplace( MTX *src );
+BOOL GNSSTK_API MTX_IdentityMinus_Inplace( MTX *src );
 
 
 /// \brief  Difference and approximte derivative for column col.
@@ -798,14 +800,14 @@ BOOL MTX_IdentityMinus_Inplace( MTX *src );
 /// diff = col[1:N-2] - col[0:N-1].
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnDiff( const MTX *M, MTX *Diff, const unsigned col );
+BOOL GNSSTK_API MTX_ColumnDiff( const MTX *M, MTX *Diff, const unsigned col );
 
 /// \brief  Difference and approximate derivative.
 /// The Diff matrix is composed of the column difference vectors.
 /// for(i=0:M-1){ diff_i = col_i[1:N-2] - col_i[0:N-1] }
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Diff( const MTX *M, MTX *Diff );
+BOOL GNSSTK_API MTX_Diff( const MTX *M, MTX *Diff );
 
 
     
@@ -818,7 +820,7 @@ BOOL MTX_Diff( const MTX *M, MTX *Diff );
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxColIndex( const MTX *M, const unsigned col, double *re, double *im, unsigned *row );
+BOOL GNSSTK_API MTX_MaxColIndex( const MTX *M, const unsigned col, double *re, double *im, unsigned *row );
 
 /// \brief  Computes the maximum element in the specified row and its index.
 /// If the matrix is real, only the real value, re is set, im = 0. 
@@ -826,7 +828,7 @@ BOOL MTX_MaxColIndex( const MTX *M, const unsigned col, double *re, double *im, 
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxRowIndex( const MTX *M, const unsigned row, double *re, double *im, unsigned *col );
+BOOL GNSSTK_API MTX_MaxRowIndex( const MTX *M, const unsigned row, double *re, double *im, unsigned *col );
 
 
 /// \brief  Computes the minimum element in the specified column and its index.
@@ -835,7 +837,7 @@ BOOL MTX_MaxRowIndex( const MTX *M, const unsigned row, double *re, double *im, 
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinColIndex( const MTX *M, const unsigned col, double *re, double *im, unsigned *row );  
+BOOL GNSSTK_API MTX_MinColIndex( const MTX *M, const unsigned col, double *re, double *im, unsigned *row );  
 
 /// \brief  Computes the minimum element in the specified row and its index.
 /// If the matrix is real, only the real value, re is set, im = 0. 
@@ -843,32 +845,32 @@ BOOL MTX_MinColIndex( const MTX *M, const unsigned col, double *re, double *im, 
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinRowIndex( const MTX *M, const unsigned row, double *re, double *im, unsigned *col );
+BOOL GNSSTK_API MTX_MinRowIndex( const MTX *M, const unsigned row, double *re, double *im, unsigned *col );
 
 
 /// \brief  Computes the absolute maximum element in the specified column and its index.
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbsColIndex( const MTX *M, const unsigned col, double *value, unsigned *row );  
+BOOL GNSSTK_API MTX_MaxAbsColIndex( const MTX *M, const unsigned col, double *value, unsigned *row );  
 
 /// \brief  Computes the absolue maximum element in the specified row and a its column index.
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbsRowIndex( const MTX *M, const unsigned row, double *value, unsigned *col );
+BOOL GNSSTK_API MTX_MaxAbsRowIndex( const MTX *M, const unsigned row, double *value, unsigned *col );
 
 /// \brief  Computes the absolute minimum element in the specified column and its index.
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbsColIndex( const MTX *M, const unsigned col, double *value, unsigned *row );  
+BOOL GNSSTK_API MTX_MinAbsColIndex( const MTX *M, const unsigned col, double *value, unsigned *row );  
 
 /// \brief  Computes the absolute minimum element in the specified row and its index.
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbsRowIndex( const MTX *M, const unsigned row, double *value, unsigned *col );
+BOOL GNSSTK_API MTX_MinAbsRowIndex( const MTX *M, const unsigned row, double *value, unsigned *col );
 
 
 /// \brief  Computes the maximum element in the specified column.
@@ -876,14 +878,14 @@ BOOL MTX_MinAbsRowIndex( const MTX *M, const unsigned row, double *value, unsign
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxColumn( const MTX *M, const unsigned col, double *re, double *im );
+BOOL GNSSTK_API MTX_MaxColumn( const MTX *M, const unsigned col, double *re, double *im );
 
 /// \brief  Computes the maximum element in the specified row.
 /// If the matrix is real, only the real value, re is set, im = 0. 
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxRow( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_MaxRow( const MTX *M, const unsigned row, double *re, double *im );
 
 
 /// \brief  Computes the minimum element in the specified column.
@@ -891,7 +893,7 @@ BOOL MTX_MaxRow( const MTX *M, const unsigned row, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinColumn( const MTX *M, const unsigned col, double *re, double *im );
+BOOL GNSSTK_API MTX_MinColumn( const MTX *M, const unsigned col, double *re, double *im );
 
 
 /// \brief  Computes the minimum element in the specified row.
@@ -899,75 +901,75 @@ BOOL MTX_MinColumn( const MTX *M, const unsigned col, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinRow( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_MinRow( const MTX *M, const unsigned row, double *re, double *im );
 
 
 /// \brief  Computes the absolute maximum element in the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbsColumn( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_MaxAbsColumn( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the absolute maximum element in the specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbsRow( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_MaxAbsRow( const MTX *M, const unsigned row, double *value );
 
 
 /// \brief  Computes the absolute minimum element in the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbsColumn( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_MinAbsColumn( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the absolute minimum element in the specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbsRow( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_MinAbsRow( const MTX *M, const unsigned row, double *value );
 
 
 /// \brief  Computes the absolute maximum element for the entire matrix and its row and column index.
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbsIndex( const MTX *M, double* value, unsigned *row, unsigned *col );
+BOOL GNSSTK_API MTX_MaxAbsIndex( const MTX *M, double* value, unsigned *row, unsigned *col );
 
 /// \brief  Computes the maximum element for the entire matrix and its row and column index.
 /// If there are several equal maximum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxIndex( const MTX *M, double *re, double *im, unsigned *row, unsigned *col );
+BOOL GNSSTK_API MTX_MaxIndex( const MTX *M, double *re, double *im, unsigned *row, unsigned *col );
 
 /// \brief  Computes the absolute maximum element for the entire matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MaxAbs( const MTX *M, double* value );
+BOOL GNSSTK_API MTX_MaxAbs( const MTX *M, double* value );
 
 /// \brief  Computes the maximum element for the entire matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Max( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Max( const MTX *M, double *re, double *im );
 
 
 /// \brief  Computes the absolute minimum element for the entire matrix and its row and column index.
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbsIndex( const MTX *M, double* value, unsigned *row, unsigned *col );
+BOOL GNSSTK_API MTX_MinAbsIndex( const MTX *M, double* value, unsigned *row, unsigned *col );
 
 /// \brief  Computes the minimum element for the entire matrix and its row and column index.
 /// If there are several equal minimum elements, the first index from the beginning is returned.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinIndex( const MTX *M, double *re, double *im, unsigned *row, unsigned *col );
+BOOL GNSSTK_API MTX_MinIndex( const MTX *M, double *re, double *im, unsigned *row, unsigned *col );
 
 /// \brief  Computes the absolute minimum element for the entire matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MinAbs( const MTX *M, double* value );
+BOOL GNSSTK_API MTX_MinAbs( const MTX *M, double* value );
 
 /// \brief  Computes the minimum element for the entire matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Min( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Min( const MTX *M, double *re, double *im );
 
 
 /// \brief  Computes the range of the data in the specified column. 
@@ -976,7 +978,7 @@ BOOL MTX_Min( const MTX *M, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnRange( const MTX *M, const unsigned col, double *re, double *im );
+BOOL GNSSTK_API MTX_ColumnRange( const MTX *M, const unsigned col, double *re, double *im );
    
 
 /// \brief  Computes the range of the data in the specified row. 
@@ -985,7 +987,7 @@ BOOL MTX_ColumnRange( const MTX *M, const unsigned col, double *re, double *im )
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowRange( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_RowRange( const MTX *M, const unsigned row, double *re, double *im );
 
 /// \brief  Computes the range of the data in the matrix. 
 /// Range = MaxVal - MinVal.
@@ -993,7 +995,7 @@ BOOL MTX_RowRange( const MTX *M, const unsigned row, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Range( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Range( const MTX *M, double *re, double *im );
 
 
 /// \brief  Computes the sum for the specified column.
@@ -1001,12 +1003,12 @@ BOOL MTX_Range( const MTX *M, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnSum( const MTX *M, const unsigned col,  double *re, double *im );
+BOOL GNSSTK_API MTX_ColumnSum( const MTX *M, const unsigned col,  double *re, double *im );
 
 /// \brief  Computes the sum of the absolute values for the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnSumAbs( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_ColumnSumAbs( const MTX *M, const unsigned col, double *value );
 
 
 /// \brief  Computes the sum for the specified row.
@@ -1014,14 +1016,14 @@ BOOL MTX_ColumnSumAbs( const MTX *M, const unsigned col, double *value );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowSum( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_RowSum( const MTX *M, const unsigned row, double *re, double *im );
 
 /// \brief  Computes the sum of the data in the matrix .
 /// If the matrix is real, only the real value, re is set, im = 0. 
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Sum( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Sum( const MTX *M, double *re, double *im );
 
 
 
@@ -1030,21 +1032,21 @@ BOOL MTX_Sum( const MTX *M, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnMean( const MTX *M, const unsigned col, double *re, double *im );
+BOOL GNSSTK_API MTX_ColumnMean( const MTX *M, const unsigned col, double *re, double *im );
 
 /// \brief  Computes the sample mean for the specified row.
 /// If the matrix is real, only the real value, re is set, im = 0. 
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowMean( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_RowMean( const MTX *M, const unsigned row, double *re, double *im );
 
 /// \brief  Computes the sample mean for the matrix.
 /// If the matrix is real, only the real value, re is set, im = 0. 
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Mean( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Mean( const MTX *M, double *re, double *im );
 
 
 
@@ -1052,34 +1054,34 @@ BOOL MTX_Mean( const MTX *M, double *re, double *im );
 /// \brief  Computes the sample standard deviation for the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnStdev( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_ColumnStdev( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the sample standard deviation for the specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowStdev( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_RowStdev( const MTX *M, const unsigned row, double *value );
 
 /// \brief  Computes the sample standard deviation for the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Stdev( const MTX *M, double *value );
+BOOL GNSSTK_API MTX_Stdev( const MTX *M, double *value );
 
 
 
 /// \brief  Computes the sample variance for the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnVar( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_ColumnVar( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the sample variance for the specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowVar( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_RowVar( const MTX *M, const unsigned row, double *value );
 
 /// \brief  Computes the sample variance for the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Var( const MTX *M, double *value );
+BOOL GNSSTK_API MTX_Var( const MTX *M, double *value );
 
 
 /// \brief  Computes the norm of the specified column.
@@ -1087,37 +1089,37 @@ BOOL MTX_Var( const MTX *M, double *value );
 /// If complex, norm = sqrt( sum( val*conjugate(val) ) ).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnNorm( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_ColumnNorm( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the norm of the specified row.
 /// If real, norm = sqrt( sum( val*val ) ).
 /// If complex, norm = sqrt( sum( val*conjugate(val) ) ).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowNorm( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_RowNorm( const MTX *M, const unsigned row, double *value );
 
 /// \brief  Computes the norm of the matrix.
 /// If real, norm = sqrt( sum( val*val ) ).
 /// If complex, norm = sqrt( sum( val*conjugate(val) ) ).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Norm( const MTX *M, double *value );
+BOOL GNSSTK_API MTX_Norm( const MTX *M, double *value );
 
 
 /// \brief  Computes the sample RMS value for the specified column.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnRMS( const MTX *M, const unsigned col, double *value );
+BOOL GNSSTK_API MTX_ColumnRMS( const MTX *M, const unsigned col, double *value );
 
 /// \brief  Computes the sample RMS value for the specified row.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowRMS( const MTX *M, const unsigned row, double *value );
+BOOL GNSSTK_API MTX_RowRMS( const MTX *M, const unsigned row, double *value );
 
 /// \brief  Computes the sample RMS value for the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RMS( const MTX *M, double *value );
+BOOL GNSSTK_API MTX_RMS( const MTX *M, double *value );
 
 
 /// \brief  Computes the sample skewness value for the specified column.
@@ -1126,7 +1128,7 @@ BOOL MTX_RMS( const MTX *M, double *value );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnSkewness( const MTX *M, const unsigned col, double *re, double* im );
+BOOL GNSSTK_API MTX_ColumnSkewness( const MTX *M, const unsigned col, double *re, double* im );
 
 /// \brief  Computes the sample skewness value for the specified row.
 /// The skewness is the third central moment divided by the cube of the standard deviation.
@@ -1134,7 +1136,7 @@ BOOL MTX_ColumnSkewness( const MTX *M, const unsigned col, double *re, double* i
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_RowSkewness( const MTX *M, const unsigned row, double *re, double* im );
+BOOL GNSSTK_API MTX_RowSkewness( const MTX *M, const unsigned row, double *re, double* im );
 
 /// \brief  Computes the sample skewness value for the matrix.
 /// The skewness is the third central moment divided by the cube of the standard deviation.
@@ -1142,7 +1144,7 @@ BOOL MTX_RowSkewness( const MTX *M, const unsigned row, double *re, double* im )
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Skewness( const MTX *M, double *re, double* im );
+BOOL GNSSTK_API MTX_Skewness( const MTX *M, double *re, double* im );
 
 
 
@@ -1155,7 +1157,7 @@ BOOL MTX_Skewness( const MTX *M, double *re, double* im );
 /// Reference: http://mathworld.wolfram.com/Kurtosis.html (kurtosis proper is computed).
 /// \return TRUE if successful, FALSE otherwise.
 // g_2 = \frac{m_4}{m_{2}^2} = \frac{n\,\sum_{i=1}^n (x_i - \overline{x})^4}{\left(\sum_{i=1}^n (x_i - \overline{x})^2\right)^2}.
-BOOL MTX_ColumnKurtosis( const MTX *M, const unsigned col, double *re, double *im );
+BOOL GNSSTK_API MTX_ColumnKurtosis( const MTX *M, const unsigned col, double *re, double *im );
 
 /// \brief  Computes the sample kurtosis value for the specified row.
 /// The kurtosis is the fourth central moment divided by fourth power of the standard deviation.
@@ -1167,7 +1169,7 @@ BOOL MTX_ColumnKurtosis( const MTX *M, const unsigned col, double *re, double *i
 ///
 /// \return TRUE if successful, FALSE otherwise.
 // g_2 = \frac{m_4}{m_{2}^2} = \frac{n\,\sum_{i=1}^n (x_i - \overline{x})^4}{\left(\sum_{i=1}^n (x_i - \overline{x})^2\right)^2}.
-BOOL MTX_RowKurtosis( const MTX *M, const unsigned row, double *re, double *im );
+BOOL GNSSTK_API MTX_RowKurtosis( const MTX *M, const unsigned row, double *re, double *im );
 
 
 /// \brief  Computes the sample kurtosis value for the matrix.
@@ -1180,7 +1182,7 @@ BOOL MTX_RowKurtosis( const MTX *M, const unsigned row, double *re, double *im )
 ///
 /// \return TRUE if successful, FALSE otherwise.
 // g_2 = \frac{m_4}{m_{2}^2} = \frac{n\,\sum_{i=1}^n (x_i - \overline{x})^4}{\left(\sum_{i=1}^n (x_i - \overline{x})^2\right)^2}.
-BOOL MTX_Kurtosis( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Kurtosis( const MTX *M, double *re, double *im );
 
 
 
@@ -1195,67 +1197,67 @@ BOOL MTX_Kurtosis( const MTX *M, double *re, double *im );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Trace( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Trace( const MTX *M, double *re, double *im );
 
 /// \brief  Sets the diagonal elements of M into D as a column vector
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Diagonal( const MTX *M, MTX *D );
+BOOL GNSSTK_API MTX_Diagonal( const MTX *M, MTX *D );
 
 /// \brief  Sorts each column of M in ascending order.
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortAscending( MTX *M );
+BOOL GNSSTK_API MTX_SortAscending( MTX *M );
                                                        
 /// \brief  Sorts each column of M in descending order.
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortDescending( MTX *M );
+BOOL GNSSTK_API MTX_SortDescending( MTX *M );
 
 /// \brief  Sorts a specific column in ascending order.
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortColumnAscending( MTX *M, const unsigned col );
+BOOL GNSSTK_API MTX_SortColumnAscending( MTX *M, const unsigned col );
 
 /// \brief  Sorts a specific column in descending order.
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortColumnDescending( MTX *M, const unsigned col );
+BOOL GNSSTK_API MTX_SortColumnDescending( MTX *M, const unsigned col );
 
 /// \brief  Sorts a specific column in ascending order and fills a MTX column vector with the sorted index.
 /// The index vector will be resized if index->nrows != M->nrows
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortColumnIndexed( MTX *M, const unsigned col, MTX *index );
+BOOL GNSSTK_API MTX_SortColumnIndexed( MTX *M, const unsigned col, MTX *index );
 
 /// \brief  Sorts the entire matrix by a specific column.
 /// If complex, sorts based on magnitude.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SortByColumn( MTX *M, const unsigned col );
+BOOL GNSSTK_API MTX_SortByColumn( MTX *M, const unsigned col );
 
 
 
 /// \brief  Saves a matrix to the specified file path using a proprietary compressed format.
 /// ADVANCED EDITION ONLY!
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SaveCompressed( const MTX *M, const char *path );
+BOOL GNSSTK_API MTX_SaveCompressed( const MTX *M, const char *path );
 
 
 /// \brief  Loads a binary compressed matrix that was saved using the MTX_SaveCompressed function.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ReadCompressed( MTX *M, const char *path );
+BOOL GNSSTK_API MTX_ReadCompressed( MTX *M, const char *path );
 
 /// \brief  Get attributes of the compressed file.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_GetCompressedFileAttributes( 
+BOOL GNSSTK_API MTX_GetCompressedFileAttributes( 
   const char *path,
   unsigned* nrows,
   unsigned* ncols,
@@ -1267,14 +1269,14 @@ BOOL MTX_GetCompressedFileAttributes(
 /// ADVANCED EDITION ONLY!
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_LoadAndSave( const char* infilepath, const char* outfilepath );
+BOOL GNSSTK_API MTX_LoadAndSave( const char* infilepath, const char* outfilepath );
 
 /// \brief  Read an ASCII matrix data file and save it using MTX_SaveCompressed.
 /// This version saves the data to the same base filename and uses the .mtx extension.
 /// ADVANCED EDITION ONLY!
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_LoadAndSaveQuick( const char* infilepath );
+BOOL GNSSTK_API MTX_LoadAndSaveQuick( const char* infilepath );
 
 
 /// \brief  Alter the matrix, M, so that its data is within the startTime to the startTime+duration
@@ -1283,7 +1285,7 @@ BOOL MTX_LoadAndSaveQuick( const char* infilepath );
 /// this index, the timeColumn.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TimeWindow( 
+BOOL GNSSTK_API MTX_TimeWindow( 
   MTX* M,                     //!< Matrix to be altered
   const unsigned timeColumn,   //!< The column containing time
   const double startTime,      //!< The specified start time (inclusive)
@@ -1295,7 +1297,7 @@ BOOL MTX_TimeWindow(
 /// this index, the timeColumn.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TimeLimit( 
+BOOL GNSSTK_API MTX_TimeLimit( 
   MTX* M,                     //!< Matrix to be altered
   const unsigned timeColumn,   //!< The column containing time
   const double startTime,      //!< The specified start time (inclusive)
@@ -1321,7 +1323,7 @@ BOOL MTX_TimeLimit(
 ///      0,1,2,3,4,...59,60,1,2,5,10,60,1,2,3... \n
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_TimeMatch( 
+BOOL GNSSTK_API MTX_TimeMatch( 
   MTX *A,                      //!< The matrix with interpolation times
   const unsigned timeColumnA,  //!< The zero based column index for matrix A
   MTX *B,                      //!< The matrix to be interpolated
@@ -1340,7 +1342,7 @@ BOOL MTX_TimeMatch(
 /// time aligned time columns.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Interpolate( 
+BOOL GNSSTK_API MTX_Interpolate( 
   MTX *A,                     //!< The matrix with interpolation times
   const unsigned timeColumnA, //!< The zero based column index for matrix A
   MTX *B,                     //!< The matrix to be interpolated
@@ -1354,7 +1356,7 @@ BOOL MTX_Interpolate(
 ///         of the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Inv( MTX *src );
+BOOL GNSSTK_API MTX_Inv( MTX *src );
 
 
 /// \brief  Compute the inplace inverse of the matrix.
@@ -1365,7 +1367,7 @@ BOOL MTX_Inv( MTX *src );
 ///
 /// \return TRUE if successful, FALSE if empty or has dimensions larger
 ///         than 3x3, false if singular or not square
-BOOL MTX_InvertInPlaceClosedForm( MTX *M );
+BOOL GNSSTK_API MTX_InvertInPlaceClosedForm( MTX *M );
 
 /// \brief  Compute the inplace inverse of the matrix.
 ///         Uses fast closed form solutions for:
@@ -1373,7 +1375,7 @@ BOOL MTX_InvertInPlaceClosedForm( MTX *M );
 ///
 /// \return TRUE if successful, FALSE if empty or has dimensions larger
 ///         than 3x3, false if singular or not square
-BOOL MTX_InvertClosedForm( const MTX *M, MTX *dst );
+BOOL GNSSTK_API MTX_InvertClosedForm( const MTX *M, MTX *dst );
 
 
 /// \brief  Compute the inplace inverse of a matrix.
@@ -1390,7 +1392,7 @@ BOOL MTX_InvertClosedForm( const MTX *M, MTX *dst );
 /// If the matrix is singular, the original matrix is unchanged.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_InvertInPlace( MTX *M  );
+BOOL GNSSTK_API MTX_InvertInPlace( MTX *M  );
 
 
 /// \brief  Compute the inverse of a matrix.
@@ -1407,31 +1409,31 @@ BOOL MTX_InvertInPlace( MTX *M  );
 /// If the matrix is singular, the original matrix is unchanged.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Invert( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_Invert( const MTX *src, MTX *dst );
 
 /// \brief  Perfroms an inplace matrix inverse using Gaussian Elimination methods.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_InvertInPlaceRobust( MTX *M );
+BOOL GNSSTK_API MTX_InvertInPlaceRobust( MTX *M );
 
 /// \brief  Computes a moving average using N lead samples and M lagging samples
 /// for the specified column and stores it in dst.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ColumnMovAvg( const MTX *src, const unsigned col, const unsigned lead, const unsigned lag, MTX *dst );
+BOOL GNSSTK_API MTX_ColumnMovAvg( const MTX *src, const unsigned col, const unsigned lead, const unsigned lag, MTX *dst );
 
 /// \brief  Computes a moving average using N lead samples and M lagging samples
 /// for the matrix and stores it in dst.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_MovAvg( const MTX *src, const unsigned lead, const unsigned lag, MTX *dst );
+BOOL GNSSTK_API MTX_MovAvg( const MTX *src, const unsigned lead, const unsigned lag, MTX *dst );
 
 
 
 /// \brief  Computes: InvATA = inverse( transpose(A) * A ).
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_ATAInverse( const MTX *A, MTX *InvATA );
+BOOL GNSSTK_API MTX_ATAInverse( const MTX *A, MTX *InvATA );
 
 /// \brief  Compute the inplace inverse of a unit lower triangular matrix.
 /// An example unit lower triangular matrix is: \n
@@ -1443,7 +1445,7 @@ BOOL MTX_ATAInverse( const MTX *A, MTX *InvATA );
 ///             -1/3  1/2  1/3 ];        \n
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_LowerTriangularInverseInplace( MTX *src );
+BOOL GNSSTK_API MTX_LowerTriangularInverseInplace( MTX *src );
 
 
 /// \brief  Computes the determinatnt of the square matrix M.
@@ -1451,7 +1453,7 @@ BOOL MTX_LowerTriangularInverseInplace( MTX *src );
 /// If the matrix is complex, both re and im are set.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Det( const MTX *M, double *re, double *im );
+BOOL GNSSTK_API MTX_Det( const MTX *M, double *re, double *im );
 
 
 /// \brief  LU factorization.
@@ -1461,134 +1463,134 @@ BOOL MTX_Det( const MTX *M, double *re, double *im );
 /// P, L and U are copmuted correctly if IsFullRank is set to true.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_LUFactorization( const MTX *src, BOOL *IsFullRank, MTX *P, MTX *L, MTX *U );
+BOOL GNSSTK_API MTX_LUFactorization( const MTX *src, BOOL *IsFullRank, MTX *P, MTX *L, MTX *U );
 
 
 /// \brief  Retrieve the elements of the matrix specified by the index vectors. 
 /// The index vectors must be nx1 real vectors.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IndexedValues( const MTX *src, const MTX *row_index, const MTX *col_index, MTX *dst );
+BOOL GNSSTK_API MTX_IndexedValues( const MTX *src, const MTX *row_index, const MTX *col_index, MTX *dst );
 
 
 /// \brief  Set the elements of the matrix specified by the index vectors. 
 /// The index vectors must be nx1 real vectors.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_SetIndexedValues( MTX *dst, const MTX *row_index, const MTX *col_index, const MTX *src );
+BOOL GNSSTK_API MTX_SetIndexedValues( MTX *dst, const MTX *row_index, const MTX *col_index, const MTX *src );
 
 
 /// \brief  Compute the Fast Fourier Transform of each columns in the src matrix and
 /// store it in the dst matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FFT( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_FFT( const MTX *src, MTX *dst );
 
 /// \brief  Compute the inverse Fast Fourier Transform of each columns in the src matrix and
 /// store it in the dst matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IFFT( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_IFFT( const MTX *src, MTX *dst );
 
 /// \brief  Compute the Two-Dimensional Fast Fourier Transform of the src matrix and
 /// store it in the dst matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FFT2( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_FFT2( const MTX *src, MTX *dst );
 
 /// \brief  Compute the Two-Dimensional Inverse Fast Fourier Transform of the src matrix and
 /// store it in the dst matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IFFT2( const MTX *src, MTX *dst );
+BOOL GNSSTK_API MTX_IFFT2( const MTX *src, MTX *dst );
 
 
 /// \brief  Compute the inplace Fast Fourier Transform of each column of the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FFT_Inplace( MTX *src);
+BOOL GNSSTK_API MTX_FFT_Inplace( MTX *src);
 
 /// \brief  Compute the inplace inverse Fast Fourier Transform of each column of the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IFFT_Inplace( MTX *src);
+BOOL GNSSTK_API MTX_IFFT_Inplace( MTX *src);
 
 
 /// \brief  Compute the inplace two dimensional Fast Fourier Transform of the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_FFT2_Inplace( MTX *src);
+BOOL GNSSTK_API MTX_FFT2_Inplace( MTX *src);
 
 /// \brief  Compute the inplace two dimensional inverse Fast Fourier Transform of the matrix.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_IFFT2_Inplace( MTX *src);
+BOOL GNSSTK_API MTX_IFFT2_Inplace( MTX *src);
 
 
 
 /// \brief  Compute the sine of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_sin( MTX *src );
+BOOL GNSSTK_API MTX_sin( MTX *src );
 
 /// \brief  Compute the sin(pi*x)/(pi*) of each element in the matrix. 
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_sinc( MTX *src );
+BOOL GNSSTK_API MTX_sinc( MTX *src );
 
 /// \brief  Compute the hyperbolic sine of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_sinh( MTX *src );
+BOOL GNSSTK_API MTX_sinh( MTX *src );
 
 /// \brief  Compute the inverse hyperbolic sine of each element in the matrix. 
 /// Results in radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_asinh( MTX *src );
+BOOL GNSSTK_API MTX_asinh( MTX *src );
 
 /// \brief  Compute the cosine of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_cos( MTX *src );
+BOOL GNSSTK_API MTX_cos( MTX *src );
 
 /// \brief  Compute the hyperbolic cosine of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_cosh( MTX *src );
+BOOL GNSSTK_API MTX_cosh( MTX *src );
 
 /// \brief  Compute the inverse hyperbolic cosine of each element in the matrix. 
 /// Results in radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_acosh( MTX *src );
+BOOL GNSSTK_API MTX_acosh( MTX *src );
 
 /// \brief  Compute the tangent of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_tan( MTX *src );
+BOOL GNSSTK_API MTX_tan( MTX *src );
 
 /// \brief  Compute the hyperbolic tangent of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_tanh( MTX *src );
+BOOL GNSSTK_API MTX_tanh( MTX *src );
 
 /// \brief  Compute the inverse hyperbolic tangent of each element in the matrix. 
 /// Results in radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_atanh( MTX *src );
+BOOL GNSSTK_API MTX_atanh( MTX *src );
 
 
 /// \brief  Compute the cotangent of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_cot( MTX *src );
+BOOL GNSSTK_API MTX_cot( MTX *src );
 
 /// \brief  Compute the hyperbolic cotangent of each element in the matrix. Assumes elements are radians.
 ///
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_coth( MTX *src );
+BOOL GNSSTK_API MTX_coth( MTX *src );
 
 
 
@@ -1599,7 +1601,7 @@ BOOL MTX_coth( MTX *src );
 /// e.g. b = 2:-2:-9 = [2; 0; -2; -4; -6; -9;] \n
 ///
 /// \return TRUE if successful, FALSE otherwise.    
-BOOL MTX_Colon( MTX *dst, const double start, const double increment, const double end );
+BOOL GNSSTK_API MTX_Colon( MTX *dst, const double start, const double increment, const double end );
 
 
 /** \brief  A very efficient method to remove rows and columns from the matrix.
@@ -1625,7 +1627,7 @@ BOOL MTX_Colon( MTX *dst, const double start, const double increment, const doub
 *
 *  \return TRUE if successful, FALSE otherwise.
 */
-BOOL MTX_RemoveRowsAndColumns( 
+BOOL GNSSTK_API MTX_RemoveRowsAndColumns( 
   MTX *src,        //!< The pointer to the matrix object.
   const unsigned nrows,  //!< The number of rows to remove (the length of the rows array).
   const unsigned rows[], //!< The array of row indices to remove.
@@ -1647,7 +1649,7 @@ result = MTX_Hilbert( &H, 3);
 
 \return TRUE if successful, FALSE otherwise.
 */
-BOOL MTX_Hilbert( MTX *src, const unsigned N );
+BOOL GNSSTK_API MTX_Hilbert( MTX *src, const unsigned N );
 
 
 /** 
@@ -1663,7 +1665,7 @@ MTX_randn( 1000, 1 ); // create a standard-normal distributed random vector of 1
  
 \return TRUE if successful, FALSE otherwise.
 */
-BOOL MTX_randn( 
+BOOL GNSSTK_API MTX_randn( 
   MTX* M, 
   const unsigned nrows, 
   const unsigned ncols,   
@@ -1682,7 +1684,7 @@ MTX_rand( 1000, 1 ); // create a uniformly distributed random vector of 1000 row
  
 \return TRUE if successful, FALSE otherwise.
 */
-BOOL MTX_rand( 
+BOOL GNSSTK_API MTX_rand( 
   MTX* M, 
   const unsigned nrows, 
   const unsigned ncols,   
@@ -1691,18 +1693,18 @@ BOOL MTX_rand(
 
 
 /// \brief  Test if a double value is NaN.
-BOOL MTX_IsNAN( double value );
+BOOL GNSSTK_API MTX_IsNAN( double value );
 
 /// \brief  Test if a double value is +INF.
-BOOL MTX_IsPostiveINF( double value );
+BOOL GNSSTK_API MTX_IsPostiveINF( double value );
 
 /// \brief  Test if a double value is -INF.
-BOOL MTX_IsNegativeINF( double value );
+BOOL GNSSTK_API MTX_IsNegativeINF( double value );
 
 
 /// \brief  A quick plot, to a RLE compressed windows bitmap file, x_column vs y_column of the matrix M.
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_PlotQuick( MTX* M, const char* bmpfilename, const unsigned x_col, const unsigned y_col );
+BOOL GNSSTK_API MTX_PlotQuick( MTX* M, const char* bmpfilename, const unsigned x_col, const unsigned y_col );
 
 
 /// \brief  These are the supported colors.
@@ -1766,7 +1768,7 @@ typedef struct
 
 /// \brief  Plot up to 12 series on one figure directly to an RLE compressed BITMAP file.
 /// \return TRUE if successful, FALSE otherwise.
-BOOL MTX_Plot( 
+BOOL GNSSTK_API MTX_Plot( 
   const char* bmpfilename,         //!< The output RLE compressed BITMAP filename.
   const char* title,               //!< The plot title (NULL if not used).
   const unsigned plot_height_cm,   //!< The plot height in cm.
@@ -1802,7 +1804,7 @@ MTX_Free( &B );
 
 \return TRUE if succesful, FALSE otherwise.
 */
-BOOL MTX_Swap( MTX* A, MTX *B );
+BOOL GNSSTK_API MTX_Swap( MTX* A, MTX *B );
 
 
 #ifdef _DEBUG
@@ -1835,7 +1837,7 @@ BOOL MTX_Swap( MTX* A, MTX *B );
 ///         for any square, full rank, symmetrical matrix.  
 ///
 /// \return TRUE if succesful, FALSE otherwise. FALSE if not full rank.
-BOOL MTX_LDLt( 
+BOOL GNSSTK_API MTX_LDLt( 
   MTX* src,           //!< src = L*D*Lt
   MTX *L,             //!< src = L*D*Lt
   MTX* d,             //!< src = L*D*Lt, d it the vector diagonal of D.
@@ -1847,7 +1849,7 @@ BOOL MTX_LDLt(
 ///         for any square, full rank, symmetrical matrix.  
 ///
 /// \return TRUE if succesful, FALSE otherwise. FALSE if not full rank.
-BOOL MTX_UDUt( 
+BOOL GNSSTK_API MTX_UDUt( 
   MTX* src,           //!< src = U*D*Ut
   MTX *U,             //!< src = U*D*Ut
   MTX* d,             //!< src = U*D*Ut, d it the vector diagonal of D.
@@ -1861,7 +1863,7 @@ erf(x) = 2/sqrt(pi) * [integral from 0 to x of]( e^(-t^2) )dt.
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_erf_Inplace( MTX* src );
+BOOL GNSSTK_API MTX_erf_Inplace( MTX* src );
 
 
 /** 
@@ -1870,7 +1872,7 @@ y = erf(x), compute x given y, i.e. x = erfinv(y).
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_erfinv_Inplace( MTX* src );
+BOOL GNSSTK_API MTX_erfinv_Inplace( MTX* src );
 
 /** 
 \brief  Compute the complementary error function (erfc) for all values in the matrix inplace.
@@ -1878,7 +1880,7 @@ erfc(x) = 1 - erf(x) =  2/sqrt(pi) * [integral from x to inf of]( e^(-t^2) )dt.
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_erfc_Inplace( MTX* src );
+BOOL GNSSTK_API MTX_erfc_Inplace( MTX* src );
 
 
 /** 
@@ -1886,7 +1888,7 @@ BOOL MTX_erfc_Inplace( MTX* src );
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_erfcinv_Inplace( MTX* src );
+BOOL GNSSTK_API MTX_erfcinv_Inplace( MTX* src );
 
 
 /**
@@ -1895,7 +1897,7 @@ BOOL MTX_erfcinv_Inplace( MTX* src );
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_find_column_values_equalto( 
+BOOL GNSSTK_API MTX_find_column_values_equalto( 
   const MTX* src,        //!< The source matrix to search.
   const unsigned col,    //!< The zero-based index of the column which is searched.
   MTX* indexVector,      //!< This is the index vector corresponding to the equal values in the source matrix.  
@@ -1910,7 +1912,7 @@ BOOL MTX_find_column_values_equalto(
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_find_column_values_not_equalto( 
+BOOL GNSSTK_API MTX_find_column_values_not_equalto( 
   const MTX* src,        //!< The source matrix to search.
   const unsigned col,    //!< The zero-based index of the column which is searched.
   MTX* indexVector,      //!< This is the index vector corresponding to the values that are not equal in the source matrix.  
@@ -1927,7 +1929,7 @@ BOOL MTX_find_column_values_not_equalto(
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_find_column_values_less_than( 
+BOOL GNSSTK_API MTX_find_column_values_less_than( 
   const MTX* src,        //!< The source matrix to search.
   const unsigned col,    //!< The zero-based index of the column which is searched.
   MTX* indexVector,      //!< This is the index vector of the values desired.  
@@ -1942,7 +1944,7 @@ BOOL MTX_find_column_values_less_than(
 
 \return TRUE if successful, FALSE otherwise. 
 */
-BOOL MTX_find_column_values_more_than( 
+BOOL GNSSTK_API MTX_find_column_values_more_than( 
   const MTX* src,        //!< The source matrix to search.
   const unsigned col,    //!< The zero-based index of the column which is searched.
   MTX* indexVector,      //!< This is the index vector of the values desired.  

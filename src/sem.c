@@ -95,7 +95,7 @@ BOOL SEM_ReadAlmanacDataFromFile(
     return FALSE;
   }
 
-  n = fscanf_s( in, "%s", description ); 
+  n = fscanf_s( in, "%s", description, (unsigned int)sizeof(description) );
   if(n != 1)
   {
     GNSS_ERROR_MSG( "fscanf failed." );

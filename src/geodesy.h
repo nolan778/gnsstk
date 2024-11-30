@@ -52,6 +52,7 @@ SUCH DAMAGE.
 extern "C" {
 #endif
 
+#include "gnsstk.h"
 #include "basictypes.h"
 
 
@@ -240,7 +241,7 @@ static const char *GEODESY_REFERENCE_ELLIPSE_STRING_DESCRIPTION[64] =
 \b REFERENCES \n
 - NovAtel OEM3 reference manual (www.novatel.com).
 */
-BOOL GEODESY_GetReferenceEllipseParameters( 
+BOOL GNSSTK_API GEODESY_GetReferenceEllipseParameters(
   const GEODESY_enumReferenceEllipse ellipse, //!< reference ellipse enumerated    []
   double* a,      //!< semi-major axis of the reference ellipse                     [m]
   double* b,      //!< semi-minor axis of the reference ellipse (b = a - a*f_inv)   [m] 
@@ -293,7 +294,7 @@ reference ellipse specified.
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary.\n
 */
-BOOL GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinates(
+BOOL GNSSTK_API GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinates(
   const GEODESY_enumReferenceEllipse  referenceEllipse,  //!< reference ellipse enumerated []
   const double latitude,   //!< geodetic latitude                [rad]
   const double longitude,  //!< geodetic longitude               [rad]
@@ -332,7 +333,7 @@ height for the reference ellipse specified. An iterative approach is used.
   Measurements and Performance. Ganga-Jamuna Press. 
   ISBN 0-9709544-0-9. PP. 115-116. \n
 */
-BOOL GEODESY_ConvertEarthFixedCartesianToGeodeticCurvilinearCoordinates(
+BOOL GNSSTK_API GEODESY_ConvertEarthFixedCartesianToGeodeticCurvilinearCoordinates(
   const GEODESY_enumReferenceEllipse  referenceEllipse,  //!< reference ellipse enumerated []
   const double x,              // earth fixed cartesian coordinate [m]
   const double y,              // earth fixed cartesian coordinate [m]
@@ -358,7 +359,7 @@ longitude, and height for the reference ellipse specified.
 [1] Schwartz, K. P. (1997). ENGO 421 Lecture Notes - Fundamentals of Geodesy. 
    Chapter 4, pp 79. \n
 */
-BOOL GEODESY_ComputeNorthingEastingVertical(
+BOOL GNSSTK_API GEODESY_ComputeNorthingEastingVertical(
   const GEODESY_enumReferenceEllipse  referenceEllipse,  //!< reference ellipse enumerated []
   const double referenceLatitude,  //!< datum geodetic latitude  [rad]
   const double referenceLongitude, //!< datum geodetic longitude [rad]
@@ -387,7 +388,7 @@ frame is used.
 \b REFERENCES \n
 \see GEODESY_ComputeNorthingEastingVertical
 */
-BOOL GEODESY_ComputePositionDifference(
+BOOL GNSSTK_API GEODESY_ComputePositionDifference(
   const GEODESY_enumReferenceEllipse  referenceEllipse,  //!< reference ellipse enumerated []
   const double referenceLatitude,  //!< reference point geodetic latitude  [rad]
   const double referenceLongitude, //!< reference point geodetic longitude [rad]
@@ -417,7 +418,7 @@ BOOL GEODESY_ComputePositionDifference(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */
-BOOL GEODESY_ComputeMeridianRadiusOfCurvature(
+BOOL GNSSTK_API GEODESY_ComputeMeridianRadiusOfCurvature(
   const GEODESY_enumReferenceEllipse  referenceEllipse, //!< reference ellipse enumerated []
   const double latitude,  //!< geodetic latitude                     [rad]
   double*  M              //!< computed meridian radius of curvature [m]
@@ -437,7 +438,7 @@ BOOL GEODESY_ComputeMeridianRadiusOfCurvature(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */
-BOOL GEODESY_ComputePrimeVerticalRadiusOfCurvature(
+BOOL GNSSTK_API GEODESY_ComputePrimeVerticalRadiusOfCurvature(
   const GEODESY_enumReferenceEllipse  referenceEllipse, //!< reference ellipse enumerated []
   const double latitude,  //!< geodetic latitude                           [rad]
   double*  N              //!< computed prime vertical radius of curvature [m]
@@ -458,7 +459,7 @@ BOOL GEODESY_ComputePrimeVerticalRadiusOfCurvature(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */
-BOOL GEODESY_ComputeMeridianArcBetweenTwoLatitudes(
+BOOL GNSSTK_API GEODESY_ComputeMeridianArcBetweenTwoLatitudes(
   const GEODESY_enumReferenceEllipse  referenceEllipse, //!< reference ellipse enumerated []
   const double referenceLatitude,  //!< datum geodetic latitude  [rad]
   const double latitude,           //!< geodetic latitude        [rad]
@@ -480,7 +481,7 @@ BOOL GEODESY_ComputeMeridianArcBetweenTwoLatitudes(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */ 
-BOOL GEODESY_ComputeParallelArcBetweenTwoLongitudes(
+BOOL GNSSTK_API GEODESY_ComputeParallelArcBetweenTwoLongitudes(
   const GEODESY_enumReferenceEllipse  referenceEllipse, //!< reference ellipse enumerated []
   const double referenceLatitude,  //!< reference geodetic latitude  [rad]
   const double referenceLongitude, //!< reference geodetic longitude [rad]
@@ -501,7 +502,7 @@ BOOL GEODESY_ComputeParallelArcBetweenTwoLongitudes(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */ 
-BOOL GEODESY_RotateVectorFromLocalGeodeticFrameToEarthFixedFrame(
+BOOL GNSSTK_API GEODESY_RotateVectorFromLocalGeodeticFrameToEarthFixedFrame(
   const double referenceLatitude,  //!< reference geodetic latitude                 [rad]
   const double referenceLongitude, //!< reference geodetic longitude                [rad]
   const double dN,                 //!< local geodetic northing vector component    [m]
@@ -525,7 +526,7 @@ BOOL GEODESY_RotateVectorFromLocalGeodeticFrameToEarthFixedFrame(
   Chapter 3, pp. 33-66 & Appendix B, pp. 178-183. Geomatics Engineering, 
   University of Calgary. \n
 */ 
-BOOL GEODESY_RotateVectorFromEarthFixedFrameToLocalGeodeticFrame(
+BOOL GNSSTK_API GEODESY_RotateVectorFromEarthFixedFrameToLocalGeodeticFrame(
   const double referenceLatitude,  //!< reference geodetic latitude                 [rad]
   const double referenceLongitude, //!< reference geodetic longitude                [rad]
   const double dX,                 //!< earth centered earth fixed vector component [m]
@@ -546,7 +547,7 @@ e.g. between a user gps location (from) and a satellite (to).
 \since    2005-07-30 
 \return   TRUE(1) if successful, FALSE(0) otherwise.
  */
-BOOL GEODESY_ComputeAzimuthAndElevationAnglesBetweenToPointsInTheEarthFixedFrame(
+BOOL GNSSTK_API GEODESY_ComputeAzimuthAndElevationAnglesBetweenToPointsInTheEarthFixedFrame(
   const GEODESY_enumReferenceEllipse  referenceEllipse, //!< reference ellipse enumerated []
   const double fromX, //!< earth centered earth fixed vector from point X component [m]
   const double fromY, //!< earth centered earth fixed vector from point Y component [m]
