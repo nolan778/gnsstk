@@ -387,7 +387,7 @@ namespace GNSS
         
     // Perform very basic uniqueness check.
     n = rxData->m_nrGPSL1Obs;
-    if( rxData->m_pvt_lsq.isPositionConstrained )
+    if( rxData->m_pvt_lsq.isPositionFixed )
     {
       n += 3;
     }
@@ -442,7 +442,7 @@ namespace GNSS
     
     // Check uniqueness
     n = nrValidEph;
-    if( rxData->m_pvt_lsq.isPositionConstrained )
+    if( rxData->m_pvt_lsq.isPositionFixed )
     {
       n += 3;
     }
@@ -471,7 +471,7 @@ namespace GNSS
 
       // Check uniqueness
       n = nrP;
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         n += 3;
       }
@@ -522,7 +522,7 @@ namespace GNSS
         // Check uniqueness
         nrP = nrDifferentialPsr;
         n = nrP;
-        if( rxData->m_pvt_lsq.isPositionConstrained )
+        if( rxData->m_pvt_lsq.isPositionFixed )
         {
           n += 3;
         }
@@ -569,7 +569,7 @@ namespace GNSS
         }
       }    
       // Add constraints to H if any.
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         m_posLSQ.H[j][0] = 1.0; // latitude constraint
         j++;
@@ -608,7 +608,7 @@ namespace GNSS
         }
       }            
       // Add constraints to w if any.      
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         double w_lat = 0.0;
         double w_lon = 0.0;
@@ -657,7 +657,7 @@ namespace GNSS
         }
       }
       // Deal with constraints.
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         m_posLSQ.R[j][j] = rxData->m_pvt_lsq.std_lat*rxData->m_pvt_lsq.std_lat; 
         j++;
@@ -769,7 +769,7 @@ namespace GNSS
       dtmp1 = fabs(m_posLSQ.dx[0]) + fabs(m_posLSQ.dx[1]) + fabs(m_posLSQ.dx[2]) + fabs(m_posLSQ.dx[3]);
       if( dtmp1 < 0.0001 )
       {
-        if( !rxData->m_pvt_lsq.isPositionConstrained )
+        if( !rxData->m_pvt_lsq.isPositionFixed )
         {
           // Test the residuals
           result = PerformGlobalTestAndTestForMeasurementFaults( 
@@ -886,7 +886,7 @@ namespace GNSS
 
       // Check uniqueness
       n = nrD;
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         n += 3;
       }
@@ -935,7 +935,7 @@ namespace GNSS
         // Check uniqueness.
         nrD = nrDifferentialDoppler;
         n = nrD;
-        if( rxData->m_pvt_lsq.isPositionConstrained )
+        if( rxData->m_pvt_lsq.isPositionFixed )
         {
           n += 3;
         }
@@ -999,7 +999,7 @@ namespace GNSS
           j++;
         }
       }
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         m_velLSQ.H[j][0] = 1.0;
         j++;
@@ -1033,7 +1033,7 @@ namespace GNSS
         }
       }
       // Deal with constraints.
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         m_velLSQ.R[j][j] = 1.0e-10; 
         j++;
@@ -1086,7 +1086,7 @@ namespace GNSS
           j++;
         }
       }
-      if( rxData->m_pvt_lsq.isPositionConstrained )
+      if( rxData->m_pvt_lsq.isPositionFixed )
       {
         m_velLSQ.w[j] = 0.0;
         j++;
@@ -1166,7 +1166,7 @@ namespace GNSS
       dtmp1 = fabs(m_velLSQ.dx[0]) + fabs(m_velLSQ.dx[1]) + fabs(m_velLSQ.dx[2]) + fabs(m_velLSQ.dx[3]);
       if( dtmp1 < 1.0e-10 )
       {
-        if( !rxData->m_pvt_lsq.isPositionConstrained )
+        if( !rxData->m_pvt_lsq.isPositionFixed )
         {
           // Test the residuals
           result = PerformGlobalTestAndTestForMeasurementFaults( 
@@ -1404,8 +1404,8 @@ namespace GNSS
             }
 
             // Account for week rollover if needed.
-            if( eph.week < 1024 )
-              eph.week += 1024;
+            if( eph.week > 1024 )
+              eph.week -= 1024;
 
 
             // Check the age of the clock information for the ephemeris.
@@ -2335,7 +2335,7 @@ namespace GNSS
       return false;
     }
 
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       GEODESY_ComputePrimeVerticalRadiusOfCurvature(
         GEODESY_REFERENCE_ELLIPSE_WGS84,
@@ -2363,7 +2363,7 @@ namespace GNSS
     double &w_hgt        //!< The computed height constraint misclosure [m].
     )
   {
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       GNSS_ERROR_MSG( "Already position constrained." );
       return false;
@@ -2592,7 +2592,7 @@ namespace GNSS
         // If differential, range_base != 0, and the ambiguity is the single differnce ambiguity [m].
         adr_computed = rxData->m_ObsArray[index].range - range_base;
         adr_computed += rxData->m_pvt.clockOffset;          
-        adr_computed += rxData->m_ObsArray[index].ambiguity; 
+        adr_computed += rxData->m_ObsArray[index].sd_ambiguity; 
 
         // The misclosure is the corrected measured value minus the computed valid.
         rxData->m_ObsArray[index].adr_misclosure = adr_measured - adr_computed;            
@@ -2703,7 +2703,7 @@ namespace GNSS
           // If differential, range_base != 0, and the ambiguity is the single differnce ambiguity [m].
           adr_computed = rxData->m_ObsArray[index].range - range_base;
           adr_computed += rxData->m_pvt.clockOffset;          
-          adr_computed += rxData->m_ObsArray[index].ambiguity; 
+          adr_computed += rxData->m_ObsArray[index].sd_ambiguity; 
 
           // The misclosure is the corrected measured value minus the computed valid.
           rxData->m_ObsArray[index].adr_residual_sd = adr_measured - adr_computed;            
@@ -2791,7 +2791,7 @@ namespace GNSS
     {
       sd_adr_residual_baseSat = rxData->m_ObsArray[index_baseSat].adr_residual_sd;
       // remove the single difference float ambiguity
-      sd_adr_residual_baseSat -= rxData->m_ObsArray[index_baseSat].ambiguity; 
+      sd_adr_residual_baseSat -= rxData->m_ObsArray[index_baseSat].sd_ambiguity; 
     }
     else
     {
@@ -2809,8 +2809,8 @@ namespace GNSS
       {
         // remove the single difference float ambiguity
         sd_adr_residual = rxData->m_ObsArray[index].adr_residual_sd;
-        sd_adr_residual -= rxData->m_ObsArray[index].ambiguity; 
-        rxData->m_ObsArray[index].adr_residual_dd_fixed = (sd_adr_residual - sd_adr_residual_baseSat) + rxData->m_ObsArray[index].ambiguity_dd_fixed*GPS_WAVELENGTHL1;
+        sd_adr_residual -= rxData->m_ObsArray[index].sd_ambiguity; 
+        rxData->m_ObsArray[index].adr_residual_dd_fixed = (sd_adr_residual - sd_adr_residual_baseSat) + rxData->m_ObsArray[index].dd_ambiguity_fixed*GPS_WAVELENGTHL1;
       }
     }
     return true;
@@ -2895,7 +2895,7 @@ namespace GNSS
       // If differential, range_base != 0, and the ambiguity is the single differnce ambiguity [m].
       adr_computed = rxData->m_ObsArray[index_baseSat].range - range_base;
       adr_computed += rxData->m_pvt.clockOffset;          
-      adr_computed += rxData->m_ObsArray[index_baseSat].ambiguity; 
+      adr_computed += rxData->m_ObsArray[index_baseSat].sd_ambiguity; 
 
       // The misclosure is the corrected measured value minus the computed valid.
       rxData->m_ObsArray[index_baseSat].adr_misclosure = adr_measured - adr_computed;
@@ -2975,7 +2975,7 @@ namespace GNSS
         // If differential, range_base != 0, and the ambiguity is the single differnce ambiguity [m].
         adr_computed = rxData->m_ObsArray[index].range - range_base;
         adr_computed += rxData->m_pvt.clockOffset;          
-        adr_computed += rxData->m_ObsArray[index].ambiguity; 
+        adr_computed += rxData->m_ObsArray[index].sd_ambiguity; 
 
         // The misclosure is the corrected measured value minus the computed valid.
         rxData->m_ObsArray[index].adr_misclosure = adr_measured - adr_computed;            
@@ -3111,7 +3111,7 @@ namespace GNSS
           adr_computed = rxData->m_ObsArray[i].range - range_base;
           
           //adr_computed += rxData->m_pvt.clockOffset;          
-          //adr_computed += rxData->m_ObsArray[i].ambiguity; 
+          //adr_computed += rxData->m_ObsArray[i].sd_ambiguity; 
 
           // The misclosure is the corrected measured value minus the computed valid but not including rx clock or SD ambiguity.
           rxData->m_ObsArray[i].adr_misclosure_temp = adr_measured - adr_computed;            
@@ -3495,7 +3495,7 @@ namespace GNSS
       rv = fabs( r_standardized[i] );
 
       // don't allow the position constraint to be rejected.
-      if( rxData.m_pvt.isPositionConstrained )
+      if( rxData.m_pvt.isPositionFixed )
       {
         if( i >= Cr.GetNrRows() -3 )
           continue;
@@ -4266,7 +4266,7 @@ namespace GNSS
     nrD = rxData->m_pvt.nrDopplerObsUsed;
 
     n = nrP + nrD;
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
       n += 6;
     else if( rxData->m_pvt.isHeightConstrained )
       n += 2;
@@ -4341,7 +4341,7 @@ namespace GNSS
       }
 
       n = nrDifferentialPsr + nrDifferentialDoppler;
-      if( rxData->m_pvt.isPositionConstrained )
+      if( rxData->m_pvt.isPositionFixed )
         n += 6;
       else if( rxData->m_pvt.isHeightConstrained )
         n += 2;
@@ -4398,7 +4398,7 @@ namespace GNSS
         j++;
       }
     }
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       m_EKF.H[j][0] = 1.0;
       j++;
@@ -4462,7 +4462,7 @@ namespace GNSS
       }
     }
     // Add constraints to w if any.      
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       double w_lat = 0.0;
       double w_lon = 0.0;
@@ -4529,7 +4529,7 @@ namespace GNSS
       }
     }
     // Deal with constraints.
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       m_EKF.R[j][j] = rxData->m_pvt.std_lat*rxData->m_pvt.std_lat; 
       j++;
@@ -5010,7 +5010,7 @@ namespace GNSS
 
     if( isEightStateModel )
     {     
-      if( rxData->m_pvt.isPositionConstrained )
+      if( rxData->m_pvt.isPositionFixed )
       {
         if( isEightStateModel )
         {     
@@ -5062,7 +5062,7 @@ namespace GNSS
     // Form smart_index 
     j = 0;
     // Deal with constraints first.
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       smart_index[j].type = GNSS_LAT_CONSTRAINT;
       smart_index[j].intoRxData = 0; // GDM_TODO, use -1 here?
@@ -5146,7 +5146,7 @@ namespace GNSS
     }
     
     // Form r, the combined measurement variance-covariance matrix diagonal.
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       if( isEightStateModel )
       {
@@ -5175,7 +5175,7 @@ namespace GNSS
     }
     j = 0;
     // Deal with constraints first.
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       m_RTK.r[j] = rxData->m_pvt.std_lat*rxData->m_pvt.std_lat; 
       j++;
@@ -5308,7 +5308,7 @@ namespace GNSS
     }
     
     // Determine constraint misclosures if applicable.
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       result = DeterminePositionConstraintMisclosures( rxData, w_lat, w_lon, w_hgt );
       if( !result )
@@ -5721,9 +5721,9 @@ namespace GNSS
               return false;
             }
             double delta_amb = m_RTK.dx[state_index];
-            rxData->m_ObsArray[i].ambiguity += delta_amb;
+            rxData->m_ObsArray[i].sd_ambiguity += delta_amb;
             amb[j][0] = rxData->m_ObsArray[i].id;
-            amb[j][1] = rxData->m_ObsArray[i].ambiguity;
+            amb[j][1] = rxData->m_ObsArray[i].sd_ambiguity;
             j++;
           }
         }
@@ -5831,7 +5831,7 @@ namespace GNSS
         if( rxData->m_ObsArray[i].flags.isActive &&                    
           rxData->m_ObsArray[i].flags.isAdrUsedInSolution )
         {
-          m_RTK.x[k] = rxData->m_ObsArray[i].ambiguity;
+          m_RTK.x[k] = rxData->m_ObsArray[i].sd_ambiguity;
           k++;
         }
       }       
@@ -5877,7 +5877,7 @@ namespace GNSS
           rxData->m_ObsArray[i].flags.isAdrUsedInSolution )
         {
           // compute the double difference ambiguity
-          rxData->m_ObsArray[i].ambiguity_dd = rxData->m_ObsArray[i].ambiguity - rxData->m_ObsArray[index_base].ambiguity;
+          rxData->m_ObsArray[i].dd_ambiguity = rxData->m_ObsArray[i].sd_ambiguity - rxData->m_ObsArray[index_base].sd_ambiguity;
 
           D[k][state_index_base] = -1;
           D[k][rxData->m_ObsArray[i].index_ambiguity_state] = 1;
@@ -6002,7 +6002,7 @@ namespace GNSS
         if( rxData->m_ObsArray[i].flags.isAdrUsedInSolution && !rxData->m_ObsArray[i].flags.isBaseSatellite )
         {
           if( rxData->m_ObsArray[i].index_ambiguity_state_dd > -1 )
-            rxData->m_ObsArray[i].ambiguity_dd_fixed = m_RTKDD.x[rxData->m_ObsArray[i].index_ambiguity_state_dd];
+            rxData->m_ObsArray[i].dd_ambiguity_fixed = m_RTKDD.x[rxData->m_ObsArray[i].index_ambiguity_state_dd];
         }
       }
 
@@ -6055,7 +6055,7 @@ namespace GNSS
         nrP++;
     }
     n = nrP;
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       n+=3;
     }    
@@ -6079,7 +6079,7 @@ namespace GNSS
         j++;
       }
     }
-    if( rxData->m_pvt.isPositionConstrained )
+    if( rxData->m_pvt.isPositionFixed )
     {
       H[j][0] = 1.0;
       j++;
@@ -6341,7 +6341,7 @@ namespace GNSS
                   // and the single difference pseudorange.
 
                   sd_dif = sd_adr_measured - sd_psr_measured;
-                  rxData->m_ObsArray[i].ambiguity =  sd_dif; // in meters!  //KO possibly replace psr with position derived range plus clock offset                  
+                  rxData->m_ObsArray[i].sd_ambiguity =  sd_dif; // in meters!  //KO possibly replace psr with position derived range plus clock offset                  
                 }
                 else
                 {
@@ -6422,7 +6422,7 @@ namespace GNSS
               // and the single difference pseudorange.
 
               sd_dif = sd_adr_measured - sd_psr_measured;
-              rxData->m_ObsArray[i].ambiguity =  sd_dif; // in meters!  //KO possibly replace psr with position derived range plus clock offset
+              rxData->m_ObsArray[i].sd_ambiguity =  sd_dif; // in meters!  //KO possibly replace psr with position derived range plus clock offset
 
               //double sd_computed = rxData->m_ObsArray[i].range - rxBaseData->m_ObsArray[rxData->m_ObsArray[i].index_differential_adr].range;
               //sd_computed += rxData->m_pvt.clockOffset;
@@ -6432,7 +6432,7 @@ namespace GNSS
           else
           {
             rxData->m_ObsArray[i].index_ambiguity_state = -1;
-            rxData->m_ObsArray[i].ambiguity = 0.0;
+            rxData->m_ObsArray[i].sd_ambiguity = 0.0;
           }
         }
       }

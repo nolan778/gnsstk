@@ -134,7 +134,7 @@ int main( int argc, char* argv[] )
   bool useLSQ = true;
   bool useEKF = false;
   bool useRTK = false;
-  bool useTripleDiff = false;
+  //bool useTripleDiff = false; // Commented Out: GNSS_FILTER_TYPE_TRIPLEDIFF does not exist
   bool isFilterInitialized = false;
 
   bool skipEpochForTripleDiff = true;
@@ -215,12 +215,13 @@ int main( int argc, char* argv[] )
       isEightStateModel = true;
       Estimator.m_FilterType = GNSS_Estimator::GNSS_FILTER_TYPE_RTK8;
     }
-    else if( opt.m_ProcessingMethod == "TRIPLEDIFF" )
-    {
-      useLSQ = true; // least squares is used for the first epoch
-      useTripleDiff = true;
-      Estimator.m_FilterType = GNSS_Estimator::GNSS_FILTER_TYPE_TRIPLEDIFF;
-    }
+    // Commented Out: GNSS_FILTER_TYPE_TRIPLEDIFF does not exist
+    //else if( opt.m_ProcessingMethod == "TRIPLEDIFF" )
+    //{
+    //  useLSQ = true; // least squares is used for the first epoch
+    //  useTripleDiff = true;
+    //  Estimator.m_FilterType = GNSS_Estimator::GNSS_FILTER_TYPE_TRIPLEDIFF;
+    //}
     else 
     {
       GNSS_ERROR_MSG( "Unexpected." );
@@ -669,26 +670,27 @@ int main( int argc, char* argv[] )
               return 1;
             }
           }
-          else if( useTripleDiff )
-          {            
-            skipEpochForTripleDiff = true;
-
-            // Estimator.m_posLSQ.P contains either the least squares covariance info
-            // or the option file specified covariance information.
-            Estimator.m_TD.Cx.Resize(3,3);
-            if( lsq_accuracy < opt_accuracy )
-            {
-              Estimator.m_TD.Cx[0][0] = 6.0*Estimator.m_posLSQ.P[0][0];
-              Estimator.m_TD.Cx[1][1] = 6.0*Estimator.m_posLSQ.P[1][1];
-              Estimator.m_TD.Cx[2][2] = 6.0*Estimator.m_posLSQ.P[2][2];
-            }
-            else
-            {
-              Estimator.m_TD.Cx[0][0] = Estimator.m_posLSQ.P[0][0];
-              Estimator.m_TD.Cx[1][1] = Estimator.m_posLSQ.P[1][1];
-              Estimator.m_TD.Cx[2][2] = Estimator.m_posLSQ.P[2][2];
-            }
-          }
+		  // Commented Out: GNSS_FILTER_TYPE_TRIPLEDIFF does not exist
+          //else if( useTripleDiff )
+          //{            
+          //  skipEpochForTripleDiff = true;
+          //
+          //  // Estimator.m_posLSQ.P contains either the least squares covariance info
+          //  // or the option file specified covariance information.
+          //  Estimator.m_TD.Cx.Resize(3,3);
+          //  if( lsq_accuracy < opt_accuracy )
+          //  {
+          //    Estimator.m_TD.Cx[0][0] = 6.0*Estimator.m_posLSQ.P[0][0];
+          //    Estimator.m_TD.Cx[1][1] = 6.0*Estimator.m_posLSQ.P[1][1];
+          //    Estimator.m_TD.Cx[2][2] = 6.0*Estimator.m_posLSQ.P[2][2];
+          //  }
+          //  else
+          //  {
+          //    Estimator.m_TD.Cx[0][0] = Estimator.m_posLSQ.P[0][0];
+          //    Estimator.m_TD.Cx[1][1] = Estimator.m_posLSQ.P[1][1];
+          //    Estimator.m_TD.Cx[2][2] = Estimator.m_posLSQ.P[2][2];
+          //  }
+          //}
           else
           {
             GNSS_ERROR_MSG( "Unexpected." );
@@ -698,42 +700,44 @@ int main( int argc, char* argv[] )
         }
       }
 
-      if( useTripleDiff )
-      {
-        if( !skipEpochForTripleDiff )
-        {
-          // copy the velocity and clock drift information to the triple difference solution
-          rxData.m_pvt.clockOffset = rxData.m_pvt_lsq.clockOffset;
-          rxData.m_pvt.std_clk = rxData.m_pvt_lsq.std_clk;
-
-          rxData.UpdateVelocityAndClockDrift(
-            rxData.m_pvt, 
-            rxData.m_pvt_lsq.vn, 
-            rxData.m_pvt_lsq.ve, 
-            rxData.m_pvt_lsq.vup, 
-            rxData.m_pvt_lsq.clockDrift,
-            rxData.m_pvt_lsq.std_vn,
-            rxData.m_pvt_lsq.std_ve,
-            rxData.m_pvt_lsq.std_vup,
-            rxData.m_pvt_lsq.std_clkdrift );
-
-          rxData.m_pvt.nrDopplerObsAvailable = rxData.m_pvt_lsq.nrDopplerObsAvailable;
-          rxData.m_pvt.nrDopplerObsRejected = rxData.m_pvt_lsq.nrDopplerObsRejected;
-          rxData.m_pvt.nrDopplerObsUsed = rxData.m_pvt_lsq.nrDopplerObsUsed;
-          
-          result = Estimator.EstimateTripleDifferenceSolution(
-            &rxData,
-            &rxDataBase,
-            wasPositionComputed
-            );
-          skipEpochForTripleDiff = true;
-        }
-        else
-        {
-          skipEpochForTripleDiff = false;
-        }
-      }
-      else if( useEKF )
+	  // Commented Out: GNSS_FILTER_TYPE_TRIPLEDIFF does not exist
+      //if( useTripleDiff )
+      //{
+      //  if( !skipEpochForTripleDiff )
+      //  {
+      //    // copy the velocity and clock drift information to the triple difference solution
+      //    rxData.m_pvt.clockOffset = rxData.m_pvt_lsq.clockOffset;
+      //    rxData.m_pvt.std_clk = rxData.m_pvt_lsq.std_clk;
+      //
+      //    rxData.UpdateVelocityAndClockDrift(
+      //      rxData.m_pvt, 
+      //      rxData.m_pvt_lsq.vn, 
+      //      rxData.m_pvt_lsq.ve, 
+      //      rxData.m_pvt_lsq.vup, 
+      //      rxData.m_pvt_lsq.clockDrift,
+      //      rxData.m_pvt_lsq.std_vn,
+      //      rxData.m_pvt_lsq.std_ve,
+      //      rxData.m_pvt_lsq.std_vup,
+      //      rxData.m_pvt_lsq.std_clkdrift );
+      //
+      //    rxData.m_pvt.nrDopplerObsAvailable = rxData.m_pvt_lsq.nrDopplerObsAvailable;
+      //    rxData.m_pvt.nrDopplerObsRejected = rxData.m_pvt_lsq.nrDopplerObsRejected;
+      //    rxData.m_pvt.nrDopplerObsUsed = rxData.m_pvt_lsq.nrDopplerObsUsed;
+      //    
+      //    result = Estimator.EstimateTripleDifferenceSolution(
+      //      &rxData,
+      //      &rxDataBase,
+      //      wasPositionComputed
+      //      );
+      //    skipEpochForTripleDiff = true;
+      //  }
+      //  else
+      //  {
+      //    skipEpochForTripleDiff = false;
+      //  }
+      //}
+      //else
+      if( useEKF )
       {
         result = Estimator.PredictAhead_EKF(
           rxData,
@@ -899,7 +903,7 @@ int main( int argc, char* argv[] )
     if( !fid_pvt )
     {
       printf( "Please close pvt.csv and type GO: " );
-      gets( msg );
+      fgets( msg, sizeof(msg), stdin );
       fid_pvt = fopen( "pvt.csv", "w" );
       if( !fid_pvt )
       {
@@ -941,7 +945,7 @@ int main( int argc, char* argv[] )
       if( !fid_obs )
       {
         printf( "Please close %s and type GO: ", fname );
-        gets( msg );
+        fgets( msg, sizeof(msg), stdin );
         fid_obs = fopen( fname, "w" );
         if( !fid_obs )
         {
